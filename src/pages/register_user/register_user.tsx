@@ -22,6 +22,7 @@ export default function RegisterForm() {
           className="register-form"
           name="register-form"
           onSubmit={handleSubmit}
+          data-testid="register-form"
         >
           <div>
             <label htmlFor="email"></label>
@@ -62,7 +63,7 @@ export default function RegisterForm() {
           <div>
             <label htmlFor="number"></label>
             <input
-              type="string"
+              type="text"
               name="number"
               id="number"
               placeholder="Número de Teléfono:"
@@ -71,7 +72,7 @@ export default function RegisterForm() {
           <div>
             <label htmlFor="address"></label>
             <input
-              type="string"
+              type="text"
               name="address"
               id="address"
               placeholder="Dirección: "

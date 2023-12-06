@@ -77,3 +77,4 @@ Front:
 - Para que envolvemos en un provider = store
 - Login Header, llamar a una función
 - Menu, llamar a una función
+- RegisterUser

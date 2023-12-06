@@ -8,5 +8,5 @@ export default {
   moduleNameMapper: {
     '\\.(css|scss)$': 'identity-obj-proxy',
   },
-  coveragePathIgnorePatterns: ['src/services/storage.ts'],
+  coveragePathIgnorePatterns: ['src/services/storage.ts', 'src/main.tsx'],
 };

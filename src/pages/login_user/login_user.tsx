@@ -8,9 +8,7 @@ import './login_user.scss';
 
 export default function LoginForm() {
   const { login } = useUsers();
-  const { loggedUser, token } = useSelector(
-    (state: RootState) => state.usersState
-  );
+  const { token } = useSelector((state: RootState) => state.usersState);
   const navigate = useNavigate();
 
   const handleSubmit = (event: SyntheticEvent) => {
@@ -27,10 +25,7 @@ export default function LoginForm() {
     };
     login(newUser);
     if (token === '') {
-      console.log('datos no coinciden');
     } else {
-      console.log(token);
-      console.log(loggedUser);
       form.reset();
       navigate('/home');
     }
@@ -39,7 +34,12 @@ export default function LoginForm() {
     <>
       <div className="login-container">
         <p className="login-account">Inicia sesión</p>
-        <form className="login-form" name="login-form" onSubmit={handleSubmit}>
+        <form
+          className="login-form"
+          name="login-form"
+          onSubmit={handleSubmit}
+          data-testid="login-form"
+        >
           <div>
             <label htmlFor="email"></label>
             <input type="email" name="email" id="email" placeholder="Email: " />
