@@ -68,6 +68,12 @@ Presentación: jueves 21/12/2023.
 
 DUDAD DE TESTIING:
 
+Back:
+
 - userController: Search y porque no pasa en Sonar.
-- crypto
-- dbConnect
+
+Front:
+
+- Para que envolvemos en un provider = store
+- Login Header, llamar a una función
+- Menu, llamar a una función
