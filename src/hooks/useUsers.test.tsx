@@ -16,8 +16,7 @@ const mockNewUser = {} as FormData;
 const mockToken = '1';
 describe('Given useUsers Hook', () => {
   const TestComponent = () => {
-    const { makeLogOut, login, loginWithToken, register, logoutUser } =
-      useUsers();
+    const { makeLogOut, login, loginWithToken, register } = useUsers();
 
     return (
       <>
@@ -25,7 +24,6 @@ describe('Given useUsers Hook', () => {
         <button onClick={() => login(mockLoginUser)}> </button>
         <button onClick={() => loginWithToken(mockToken)}> </button>
         <button onClick={() => register(mockNewUser)}> </button>
-        <button onClick={() => logoutUser()}> </button>
       </>
     );
   };
@@ -65,13 +63,6 @@ describe('Given useUsers Hook', () => {
       RepoUsers.prototype.createUser = jest.fn();
 
       await userEvent.click(elements[3]);
-      expect(useDispatch()).toHaveBeenCalled();
-    });
-  });
-
-  describe('When we click button logoutUser ', () => {
-    test('Then the dispacht should have been called', async () => {
-      await userEvent.click(elements[4]);
       expect(useDispatch()).toHaveBeenCalled();
     });
   });
