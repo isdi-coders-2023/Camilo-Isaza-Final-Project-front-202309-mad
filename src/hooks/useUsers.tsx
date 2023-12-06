@@ -1,6 +1,6 @@
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../store/store';
-import { logout } from '../slices/users.slice';
+
 import { loginThunk, loginTokenThunk } from '../slices/users.thunks';
 import { RepoUsers } from '../services/users/repoUsers';
 import { LoginUser } from '../model/user';
@@ -28,16 +28,11 @@ export function useUsers() {
     dispatch(loginTokenThunk({ token, repo }));
   };
 
-  const logoutUser = () => {
-    dispatch(logout());
-    userStore.remove;
-  };
-
   return {
     register,
     login,
     loginWithToken,
-    logoutUser,
+
     makeLogOut,
   };
 }
