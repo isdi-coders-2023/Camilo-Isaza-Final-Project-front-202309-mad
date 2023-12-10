@@ -8,7 +8,7 @@ import { Router } from '../router/router';
 export function App() {
   const menuOptions: MenuOption[] = [
     { label: 'Home', path: '/' },
-    { label: 'Cascos', path: '/' },
+    { label: 'Cascos', path: '/helmets' },
     { label: 'Certificados', path: '/' },
     { label: 'Sobre Nosotros', path: '/' },
   ];

@@ -1,0 +1,25 @@
+.category-list {
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
+  margin-bottom: 2rem;
+  padding-inline: 2rem;
+  background-color: #f0f0f0;
+  font-family: 'Quantico', sans-serif;
+  ul {
+    display: flex;
+    gap: 1rem;
+  }
+  p {
+    font-size: 1.5rem;
+  }
+}
+.logout-button {
+  font-family: 'Quantico', sans-serif;
+  font-size: 1rem;
+  font-weight: normal;
+  background-color: black;
+  color: white;
+  align-self: flex-end;
+  margin-right: 2rem;
+  margin-bottom: 1rem;
+}

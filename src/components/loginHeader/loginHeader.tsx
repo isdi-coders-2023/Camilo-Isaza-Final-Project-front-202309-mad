@@ -19,14 +19,12 @@ export function LoginHeader() {
 
   return (
     <>
-      <div></div>
       {token ? (
         <>
           <div className="logout-header">
-            <img src={loggedUser?.avatar.url} alt="" height={30} />
             <p className="username">{loggedUser?.name}</p>
             <img
-              src="./logout_icon.png"
+              src="/logout_icon.png"
               alt="logout-button"
               height={30}
               onClick={() => handleLogOut()}

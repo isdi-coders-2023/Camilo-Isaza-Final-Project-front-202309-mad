@@ -60,8 +60,11 @@ header {
     justify-content: space-between;
     align-items: center;
     background-color: black;
-
     text-align: center;
+    padding: 8px;
+    nav {
+      margin: 0;
+    }
     .header {
       justify-content: center;
       align-items: center;
@@ -73,7 +76,7 @@ header {
         margin-block: 1rem;
       }
       img {
-        height: 2rem;
+        height: 1.8rem;
         width: auto;
       }
     }

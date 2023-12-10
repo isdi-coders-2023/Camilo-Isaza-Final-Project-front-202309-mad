@@ -14,9 +14,9 @@ export function Header({ children }: Props) {
         <img src="./logo.png" alt="" />
       </div>
       {children}
-      <p className="login-header">
+      <section className="login-header">
         <LoginHeader></LoginHeader>
-      </p>
+      </section>
     </header>
   );
 }

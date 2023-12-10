@@ -1,10 +1,12 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
 
-import usersReducer from '../slices/users.slice';
+import usersReducer from '../slices/users/users.slice';
+import helmetsReducer from '../slices/helmets/helmetsSlice';
 
 export const store = configureStore({
   reducer: {
     usersState: usersReducer,
+    helmetsState: helmetsReducer,
   },
 });
 

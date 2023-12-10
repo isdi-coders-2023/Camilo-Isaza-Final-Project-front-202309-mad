@@ -8,6 +8,7 @@ export default function RegisterForm() {
 
   const handleSubmit = (event: SyntheticEvent) => {
     const form = event.target as HTMLFormElement;
+    console.log(form);
     event.preventDefault();
     const formData = new FormData(form);
 

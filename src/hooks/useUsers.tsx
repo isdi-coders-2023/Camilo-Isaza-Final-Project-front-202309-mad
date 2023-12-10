@@ -1,11 +1,11 @@
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../store/store';
 
-import { loginThunk, loginTokenThunk } from '../slices/users.thunks';
+import { loginThunk, loginTokenThunk } from '../slices/users/users.thunks';
 import { RepoUsers } from '../services/users/repoUsers';
 import { LoginUser } from '../model/user';
 import { Storage } from '../services/storage';
-import * as ac from '../slices/users.slice';
+import * as ac from '../slices/users/users.slice';
 
 export function useUsers() {
   const dispatch = useDispatch<AppDispatch>();

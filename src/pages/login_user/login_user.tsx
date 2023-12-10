@@ -25,6 +25,8 @@ export default function LoginForm() {
     };
     login(newUser);
     if (token === '') {
+      form.reset();
+      navigate('/home');
     } else {
       form.reset();
       navigate('/home');

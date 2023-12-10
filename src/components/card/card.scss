@@ -1,0 +1,58 @@
+.card {
+  display: flex;
+  width: 200px;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 0px;
+  align-items: center;
+  border: 1px solid black;
+  border-radius: 10px;
+  padding: 5px;
+  background-color: white;
+
+  p {
+    font-size: 0.8rem;
+    margin: 0;
+    color: black;
+  }
+
+  .price {
+    font-size: 0.7rem;
+  }
+
+  .card-buttons {
+    .edit-and-delete-buttons {
+      gap: 30px;
+      img {
+        border: 1px solid black;
+        border-radius: 5px;
+        padding-inline: 8px;
+        padding-top: 5px;
+        margin-inline: 15px;
+        padding-bottom: 8px;
+        background-color: white;
+        &:hover {
+          background-color: #cc1414;
+        }
+      }
+    }
+    .add-to-cart {
+      gap: 10px;
+      border: 1px solid black;
+      border-radius: 5px;
+      padding-inline: 8px;
+      padding-top: 5px;
+      background-color: white;
+    }
+  }
+
+  &:hover {
+    .add-to-cart {
+      background-color: #cc1414;
+    }
+    p {
+      color: #cc1414;
+      font-weight: 900;
+    }
+  }
+}

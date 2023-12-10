@@ -1,7 +1,7 @@
-import { LoginUser } from '../model/user';
-import { RepoUsers } from '../services/users/repoUsers';
-import { Storage } from '../services/storage';
-import { store } from '../store/store';
+import { LoginUser } from '../../model/user';
+import { RepoUsers } from '../../services/users/repoUsers';
+import { Storage } from '../../services/storage';
+import { store } from '../../store/store';
 import { loginThunk, loginTokenThunk } from './users.thunks';
 
 describe('Given...', () => {
