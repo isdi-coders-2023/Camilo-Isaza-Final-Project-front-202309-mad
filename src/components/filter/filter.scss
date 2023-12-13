@@ -4,10 +4,15 @@
   gap: 1rem;
   font-size: 1rem;
   font-family: 'Poppins', sans-serif;
-  margin-block: 1rem;
+  margin-block: 0.5rem;
   justify-content: center;
+  align-items: center;
+  height: 9vh;
+  position: sticky;
+  top: 56.33px;
   input {
     width: 6rem;
+    height: 1rem;
   }
 }
 
@@ -15,13 +20,25 @@
   .filter {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
-    font-size: 1rem;
+    gap: 0rem;
+    font-size: 0.6rem;
     font-family: 'Poppins', sans-serif;
-    margin-block: 1rem;
+    margin-block: 0.5rem;
     align-items: center;
-    input {
-      width: 6rem;
+    gap: 1rem;
+    height: 9vh;
+    position: sticky;
+    top: 56.33px;
+    .range {
+      display: flex;
+      flex-direction: row;
+      gap: 0.4rem;
+      font-size: 0.6rem;
+      align-items: center;
+      input {
+        font-size: 0.6rem;
+        height: 0.7rem;
+      }
     }
   }
 }

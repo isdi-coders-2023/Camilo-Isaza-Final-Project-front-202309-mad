@@ -1,6 +1,7 @@
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useUsers } from '../../hooks/useUsers';
 import './user_page.scss';
+import { useHelmets } from '../../hooks/useHelmets';
 
 export default function HomePage() {
   const { loggedUser } = useUsers();
@@ -12,8 +13,38 @@ export default function HomePage() {
     makeLogOut();
     navigate('/home');
   };
+
+  const { handleCurrentHelmet } = useHelmets();
+
+  let emptyHelmet = {
+    id: '',
+    reference: '',
+    inventory: 0,
+    price: 0,
+    category: '',
+    images: {
+      publicId: '',
+      size: 0,
+      width: 0,
+      height: 0,
+      format: '',
+      url: '',
+    },
+    orders: [],
+  };
   return (
     <section className="user-info">
+      {loggedUser?.role === 'Admin' ? (
+        <Link to={'/helmet-create-form'} style={{ textDecoration: 'none' }}>
+          <div className="add-helmet">
+            <button onClick={() => handleCurrentHelmet(emptyHelmet)}>
+              Añadir Casco
+            </button>
+          </div>
+        </Link>
+      ) : (
+        ''
+      )}
       <p className="your-info">TU INFORMACIÓN</p>
       <img src={loggedUser?.avatar.url} alt="User Image" height={200} />
       <p>

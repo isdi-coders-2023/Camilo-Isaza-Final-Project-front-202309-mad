@@ -88,12 +88,31 @@ export function List() {
       {helmetsClasifications.map((category) =>
         category.helmets.length > 0 ? (
           <div key={category.category} className="category-list">
-            <p>{category.category}</p>
+            <p className="category">{category.category}</p>
             <div className="helmets-list-container">
               <ul className="helmets-list">
-                {category.helmets.map((item: Helmet) => (
-                  <Card helmet={item} key={item.id}></Card>
-                ))}
+                {category.helmets.filter((item: Helmet) => {
+                  return (
+                    item.price >= range.minValue && item.price <= range.maxValue
+                  );
+                }).length > 0 ? (
+                  category.helmets
+                    .filter((item: Helmet) => {
+                      return (
+                        item.price >= range.minValue &&
+                        item.price <= range.maxValue
+                      );
+                    })
+                    .map((item: Helmet) => (
+                      <Card helmet={item} key={item.id}></Card>
+                    ))
+                ) : (
+                  <div className="no-helmets">
+                    <p>
+                      {`No hay cascos disponibles para la categoría ${category.category} a este rango de precios`}
+                    </p>
+                  </div>
+                )}
               </ul>
             </div>
           </div>

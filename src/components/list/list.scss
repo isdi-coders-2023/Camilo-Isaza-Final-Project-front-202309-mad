@@ -1,5 +1,5 @@
 .scrollable-container {
-  height: 72vh; /* o una altura fija en píxeles */
+  height: 72vh;
   overflow-y: scroll;
 }
 
@@ -7,17 +7,28 @@
   border-top: 1px solid black;
   border-bottom: 1px solid black;
   margin-bottom: 2rem;
-  padding: 0 2rem; // Cambiado de padding-inline a padding
   background-color: #f0f0f0;
   font-family: 'Poppins', sans-serif;
 
+  .no-helmets {
+    display: flex;
+
+    padding-inline: 2rem;
+
+    p {
+      font-size: 0.7rem;
+    }
+  }
+
+  .category {
+    padding-left: 2rem;
+    padding-top: 1rem;
+    margin-block: 0;
+    font-size: 1.5rem;
+  }
   ul {
     display: flex;
     gap: 3rem;
-  }
-
-  p {
-    font-size: 1.5rem;
   }
 
   .helmets-list-container {

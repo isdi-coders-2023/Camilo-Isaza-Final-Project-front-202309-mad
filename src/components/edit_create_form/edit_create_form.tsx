@@ -21,7 +21,7 @@ export function HelmetsForm({ helmet }: PropsType) {
     event.preventDefault();
     const form = event.target as HTMLFormElement;
     const formData = new FormData(form);
-    console.log(formData);
+
     createHelmet(formData);
     navigate('/helmets');
   };
@@ -30,7 +30,7 @@ export function HelmetsForm({ helmet }: PropsType) {
     event.preventDefault();
     const form = event.target as HTMLFormElement;
     const formData = new FormData(form);
-    console.log(formData);
+
     updateHelmet(helmet.id, formData);
     navigate('/helmets');
   };

@@ -13,6 +13,7 @@ export type HelmetsState = {
   helmetsStateOption: 'idle' | 'loading' | 'error';
   currentHelmet: Helmet | null;
   range: PriceRange;
+  favorites: Helmet[];
 };
 
 const initialState: HelmetsState = {
@@ -20,9 +21,10 @@ const initialState: HelmetsState = {
   helmetsStateOption: 'idle',
   currentHelmet: null,
   range: {
-    minValue: 0,
+    minValue: 50,
     maxValue: 1000000,
   },
+  favorites: [],
 };
 const HelmetsSlice = createSlice({
   name: 'helmets',

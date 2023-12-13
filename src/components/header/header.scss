@@ -5,8 +5,10 @@ header {
   justify-content: space-between;
   align-items: center;
   background-color: black;
-
+  height: 10vh;
   text-align: center;
+  position: sticky;
+  top: 0;
   .header {
     justify-content: center;
     align-items: center;
@@ -32,8 +34,10 @@ header {
     justify-content: space-between;
     align-items: center;
     background-color: black;
-
+    height: 10vh;
     text-align: center;
+    position: sticky;
+    top: 0;
     .header {
       justify-content: center;
       align-items: center;
@@ -61,7 +65,10 @@ header {
     align-items: center;
     background-color: black;
     text-align: center;
-    padding: 8px;
+    padding-inline: 8px;
+    height: 10vh;
+    position: sticky;
+    top: 0;
     nav {
       margin: 0;
     }
@@ -91,6 +98,9 @@ header {
     align-items: center;
     background-color: black;
     text-align: center;
+    height: 10vh;
+    position: sticky;
+    top: 0;
   }
 
   .header {

@@ -27,23 +27,26 @@ export function Filter() {
 
   return (
     <div className="filter">
-      <label htmlFor="minValue">Precio mínimo:</label>
-      <input
-        type="number"
-        id="minValue"
-        name="minValue"
-        placeholder="Min"
-        onChange={handleRangeChange}
-      />
-
-      <label htmlFor="maxValue">Precio máximo:</label>
-      <input
-        type="number"
-        id="maxValue"
-        name="maxValue"
-        placeholder="Max"
-        onChange={handleRangeChange}
-      />
+      <div className="range">
+        <label htmlFor="minValue">Precio mínimo: </label>
+        <input
+          type="number"
+          id="minValue"
+          name="minValue"
+          placeholder="Min"
+          onChange={handleRangeChange}
+        />
+      </div>
+      <div className="range">
+        <label htmlFor="maxValue">Precio máximo: </label>
+        <input
+          type="number"
+          id="maxValue"
+          name="maxValue"
+          placeholder="Max"
+          onChange={handleRangeChange}
+        />
+      </div>
     </div>
   );
 }
