@@ -17,7 +17,7 @@ export function Home() {
       <div className="home-images">
         <img
           src={currentImage ? './banner.png' : './migente.png'}
-          alt=""
+          alt="superkaskos images"
           className="image"
         />
       </div>

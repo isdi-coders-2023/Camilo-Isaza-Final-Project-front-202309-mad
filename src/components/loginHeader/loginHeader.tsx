@@ -1,34 +1,20 @@
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import './loginHeader.scss';
-import { useSelector } from 'react-redux';
-import { RootState } from '../../store/store';
+
 import { useUsers } from '../../hooks/useUsers';
 
 export function LoginHeader() {
-  const { token, loggedUser } = useSelector(
-    (state: RootState) => state.usersState
-  );
-  const { makeLogOut } = useUsers();
-
-  const navigate = useNavigate();
-
-  const handleLogOut = () => {
-    makeLogOut();
-    navigate('/home');
-  };
+  const { token, loggedUser } = useUsers();
 
   return (
     <>
       {token ? (
         <>
           <div className="logout-header">
-            <p className="username">{loggedUser?.name}</p>
-            <img
-              src="/logout_icon.png"
-              alt="logout-button"
-              height={30}
-              onClick={() => handleLogOut()}
-            />
+            <Link to={'/user-page'} style={{ textDecoration: 'none' }}>
+              <p className="username">{loggedUser?.name}</p>
+            </Link>
+            <img src="/shop_icon_white.png" alt="logout-button" height={20} />
           </div>
         </>
       ) : (

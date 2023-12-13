@@ -10,10 +10,12 @@ import {
 import { AppDispatch, RootState } from '../store/store';
 import { Helmet } from '../model/helmet';
 import { Category, helmetCategory } from '../types/helmetCategory';
+import { setCurrentHelmet, setRange } from '../slices/helmets/helmetsSlice';
+import { PriceRange } from '../types/range';
 
 export function useHelmets() {
   const dispatch = useDispatch<AppDispatch>();
-  const { helmets, helmetsStateOption } = useSelector(
+  const { helmets, helmetsStateOption, currentHelmet, range } = useSelector(
     (state: RootState) => state.helmetsState
   );
   const { token } = useSelector((state: RootState) => state.usersState);
@@ -25,8 +27,28 @@ export function useHelmets() {
     } catch (error) {}
   }, [repo]);
 
+  const loadInitialHelmets = async () => {
+    try {
+      await dispatch(loadHelmetThunk(repo));
+    } catch (error) {
+      console.log((error as Error).message);
+    }
+  };
+
+  const loadNewHelmet = async (loadedCategories: string[]) => {
+    try {
+      console.log(loadedCategories);
+      const result = await repo.getMoreHelmets(loadedCategories);
+
+      return result;
+    } catch (error) {
+      console.log((error as Error).message);
+    }
+  };
+
   const createHelmet = async (newHelmet: FormData) => {
     try {
+      console.log(newHelmet);
       dispatch(
         createHelmetThunk({
           repo,
@@ -39,6 +61,7 @@ export function useHelmets() {
   };
 
   const updateHelmet = async (id: Helmet['id'], helmet: FormData) => {
+    console.log(id);
     try {
       dispatch(
         updateHelmetThunk({
@@ -99,6 +122,15 @@ export function useHelmets() {
     return result;
   };
 
+  const handleCurrentHelmet = async (helmet: Helmet) => {
+    dispatch(setCurrentHelmet(helmet));
+  };
+
+  const rangeChange = (range: PriceRange) => {
+    console.log(range);
+    dispatch(setRange(range));
+  };
+
   return {
     loadHelmets,
     updateHelmet,
@@ -107,5 +139,11 @@ export function useHelmets() {
     helmets,
     helmetsStateOption,
     classifyHelmets,
+    loadInitialHelmets,
+    loadNewHelmet,
+    handleCurrentHelmet,
+    rangeChange,
+    currentHelmet,
+    range,
   };
 }

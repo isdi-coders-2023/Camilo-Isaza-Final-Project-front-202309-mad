@@ -1,20 +1,33 @@
+.scrollable-container {
+  height: 72vh; /* o una altura fija en píxeles */
+  overflow-y: scroll;
+}
+
 .category-list {
   border-top: 1px solid black;
   border-bottom: 1px solid black;
   margin-bottom: 2rem;
-  padding-inline: 2rem;
+  padding: 0 2rem; // Cambiado de padding-inline a padding
   background-color: #f0f0f0;
-  font-family: 'Quantico', sans-serif;
+  font-family: 'Poppins', sans-serif;
+
   ul {
     display: flex;
-    gap: 1rem;
+    gap: 3rem;
   }
+
   p {
     font-size: 1.5rem;
   }
+
+  .helmets-list-container {
+    overflow-x: auto;
+    white-space: nowrap;
+  }
 }
+
 .logout-button {
-  font-family: 'Quantico', sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-size: 1rem;
   font-weight: normal;
   background-color: black;

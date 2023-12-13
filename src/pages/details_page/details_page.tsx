@@ -1,29 +1,18 @@
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './details_page copy.scss';
-import { Helmet } from '../../model/helmet';
 import { useHelmets } from '../../hooks/useHelmets';
-import { RootState } from '../../store/store';
-import { useSelector } from 'react-redux';
+import { useUsers } from '../../hooks/useUsers';
 
 export default function DetailsPage() {
-  const { id } = useParams();
-  const { helmets, deleteHelmet, updateHelmet, loadHelmets } = useHelmets();
-  const helmet = helmets.find((item: Helmet) => item.id === String(id));
-  const { loggedUser, token } = useSelector(
-    (state: RootState) => state.usersState
-  );
+  const { deleteHelmet, currentHelmet } = useHelmets();
+  const { loggedUser, token } = useUsers();
   const navigate = useNavigate();
-
-  const handleAddToCart = () => {
-    console.log('agregado al carro');
-  };
 
   const handleDeleteButton = (helmetID: string) => {
     const isConfirmed = window.confirm('¿Está seguro que desea eliminar?');
 
     if (isConfirmed) {
       deleteHelmet(helmetID);
-      loadHelmets();
     }
 
     navigate('/helmets');
@@ -33,42 +22,43 @@ export default function DetailsPage() {
     <>
       <div className="details">
         <div className="images">
-          <img src={helmet?.images.url} alt="" width={300} />
+          <img src={currentHelmet?.images.url} alt="" width={300} />
         </div>
         <div className="info">
-          <h3 className="element-property">{helmet?.reference}</h3>
+          <h3 className="element-property">{currentHelmet?.reference}</h3>
 
           <p className="info-text">
             Categoría:{' '}
-            <span className="element-property">{helmet?.category}</span>
+            <span className="element-property">{currentHelmet?.category}</span>
           </p>
           <p className="info-text">
-            Precio: <span className="element-property">{helmet?.price}</span>
+            Precio:{' '}
+            <span className="element-property">{currentHelmet?.price}</span>
           </p>
           <div className="buttons">
             {loggedUser?.role === 'Admin' ? (
               <div className="edit-and-delete-buttons">
                 <Link
-                  to={'/helmet-edit-form/' + helmet?.id}
+                  to={'/currentHelmet-edit-form/' + currentHelmet?.id}
                   style={{ textDecoration: 'none' }}
                 >
                   <img src="/editar_icon.png" alt="edit button" width={30} />
                 </Link>
                 <img
+                  role="button"
                   src="/delete_icon.png"
                   alt="delete button"
                   width={30}
-                  onClick={() => handleDeleteButton(String(helmet?.id))}
+                  onClick={() => handleDeleteButton(String(currentHelmet?.id))}
                 />
               </div>
             ) : token ? (
               <div className="add-to-cart">
                 <p>Añadir al carrito</p>
                 <img
-                  src="./shop_icon.png"
+                  src="/shop_icon_white.png"
                   alt="add to cart button"
                   width={30}
-                  onClick={() => handleAddToCart()}
                 />
               </div>
             ) : (
@@ -76,7 +66,7 @@ export default function DetailsPage() {
                 <div className="add-to-cart">
                   <p>Añadir al carrito</p>
                   <img
-                    src="/shop_icon.png"
+                    src="/shop_icon_white.png"
                     alt="add to cart button"
                     width={30}
                   />

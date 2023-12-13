@@ -1,10 +1,11 @@
 import { SyntheticEvent } from 'react';
 import { useUsers } from '../../hooks/useUsers';
 import './register_user.scss';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 export default function RegisterForm() {
   const { register } = useUsers();
+  const navigate = useNavigate();
 
   const handleSubmit = (event: SyntheticEvent) => {
     const form = event.target as HTMLFormElement;
@@ -13,6 +14,7 @@ export default function RegisterForm() {
     const formData = new FormData(form);
 
     register(formData);
+    navigate('/home');
   };
 
   return (

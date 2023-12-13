@@ -1,14 +1,13 @@
 import { SyntheticEvent } from 'react';
 import { useUsers } from '../../hooks/useUsers';
 import { LoginUser } from '../../model/user';
-import { useSelector } from 'react-redux';
-import { RootState } from '../../store/store';
+
 import { Link, useNavigate } from 'react-router-dom';
 import './login_user.scss';
 
 export default function LoginForm() {
   const { login } = useUsers();
-  const { token } = useSelector((state: RootState) => state.usersState);
+
   const navigate = useNavigate();
 
   const handleSubmit = (event: SyntheticEvent) => {
@@ -23,14 +22,10 @@ export default function LoginForm() {
       email: userEmail,
       passwd: userPasswd,
     };
+    console.log(newUser);
     login(newUser);
-    if (token === '') {
-      form.reset();
-      navigate('/home');
-    } else {
-      form.reset();
-      navigate('/home');
-    }
+
+    navigate('/home');
   };
   return (
     <>
@@ -61,7 +56,7 @@ export default function LoginForm() {
           No tienes cuenta?{' '}
           <span>
             <Link to={'/user-register'} style={{ textDecoration: 'none' }}>
-              ¡Entra Aqui!
+              ¡Entra Aquì!
             </Link>
           </span>
         </p>

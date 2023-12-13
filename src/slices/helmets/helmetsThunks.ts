@@ -5,7 +5,7 @@ import { Helmet } from '../../model/helmet';
 export const loadHelmetThunk = createAsyncThunk<Helmet[], RepoHelmets>(
   'helmets/load',
   async (repo) => {
-    const Helmets = await repo.getHelmets();
+    const Helmets = await repo.getInitialHelmets();
     return Helmets;
   }
 );

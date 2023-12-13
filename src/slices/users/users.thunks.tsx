@@ -15,6 +15,7 @@ export const loginThunk = createAsyncThunk<
 >('login', async ({ loginUser, repo, userStore }) => {
   const loginResponse = await repo.login(loginUser);
   userStore.set({ token: loginResponse.token });
+  console.log(loginResponse);
   return loginResponse;
 });
 

@@ -6,20 +6,40 @@ import {
   updateHelmetThunk,
   deletHelmetThunk,
 } from './helmetsThunks';
+import { PriceRange } from '../../types/range';
 
-type HelmetsState = {
+export type HelmetsState = {
   helmets: Helmet[];
   helmetsStateOption: 'idle' | 'loading' | 'error';
+  currentHelmet: Helmet | null;
+  range: PriceRange;
 };
 
 const initialState: HelmetsState = {
   helmets: [],
   helmetsStateOption: 'idle',
+  currentHelmet: null,
+  range: {
+    minValue: 0,
+    maxValue: 1000000,
+  },
 };
 const HelmetsSlice = createSlice({
   name: 'helmets',
   initialState,
-  reducers: {},
+  reducers: {
+    setCurrentHelmet: (
+      state: HelmetsState,
+      { payload }: PayloadAction<Helmet | null>
+    ) => {
+      state.currentHelmet = payload;
+      return state;
+    },
+    setRange: (state: HelmetsState, { payload }: PayloadAction<PriceRange>) => {
+      state.range = payload;
+      return state;
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(loadHelmetThunk.pending, (state: HelmetsState) => {
       state.helmetsStateOption = 'loading';
@@ -64,3 +84,5 @@ const HelmetsSlice = createSlice({
 });
 
 export default HelmetsSlice.reducer;
+
+export const { setCurrentHelmet, setRange } = HelmetsSlice.actions;

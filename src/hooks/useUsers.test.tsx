@@ -1,10 +1,11 @@
 import { useUsers } from './useUsers';
 import { render, screen } from '@testing-library/react';
 import { userEvent } from '@testing-library/user-event';
-import { useDispatch } from 'react-redux';
+import { Provider, useDispatch } from 'react-redux';
 import { LoginUser } from '../model/user';
 import { Storage } from '../services/storage';
 import { RepoUsers } from '../services/users/repoUsers';
+import { store } from '../store/store';
 
 jest.mock('react-redux', () => ({
   ...jest.requireActual('react-redux'),
@@ -31,7 +32,11 @@ describe('Given useUsers Hook', () => {
   let elements: HTMLElement[];
 
   beforeEach(() => {
-    render(<TestComponent></TestComponent>);
+    render(
+      <Provider store={store}>
+        <TestComponent></TestComponent>
+      </Provider>
+    );
     elements = screen.getAllByRole('button');
   });
 
