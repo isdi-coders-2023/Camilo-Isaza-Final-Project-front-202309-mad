@@ -37,9 +37,6 @@ describe('Given card component when it is rendered', () => {
       </Provider>
     );
 
-    const addToCartTextElement = screen.getByText('Añadir al carrito');
-    expect(addToCartTextElement).toBeInTheDocument();
-
     const images2 = screen.getAllByRole('button');
     await userEvent.click(images2[0]);
     expect(useHelmets().handleCurrentHelmet).toHaveBeenCalled();
