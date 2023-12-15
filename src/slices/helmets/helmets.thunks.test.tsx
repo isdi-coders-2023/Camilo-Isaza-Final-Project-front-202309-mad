@@ -5,6 +5,8 @@ import {
   updateHelmetThunk,
   createHelmetThunk,
   deletHelmetThunk,
+  loadFavoriteHelmetThunk,
+  updateHelmetFavoriteThunk,
 } from './helmetsThunks';
 import { RepoHelmets } from '../../services/helmets/repoHelmets';
 import { Helmet } from '../../model/helmet';
@@ -23,8 +25,10 @@ describe('skins thunks', () => {
     store = mockStore({});
     mockRepo = {
       getInitialHelmets: jest.fn().mockResolvedValue([]),
+      getFavoriteHelmets: jest.fn().mockResolvedValue([]),
       createHelmet: jest.fn().mockResolvedValue({} as Helmet),
       updateHelmet: jest.fn().mockResolvedValue({} as Helmet),
+      updateHelmetFavorite: jest.fn().mockResolvedValue({} as Helmet),
       deleteHelmet: jest.fn().mockResolvedValue([]),
     } as unknown as RepoHelmets;
   });
@@ -34,6 +38,13 @@ describe('skins thunks', () => {
     const actions = store.getActions();
     expect(actions[0].type).toBe('helmets/load/pending');
     expect(actions[1].type).toBe('helmets/load/fulfilled');
+  });
+
+  test('loadFavoriteHelmetThunk dispatches the correct actions', async () => {
+    await store.dispatch(loadFavoriteHelmetThunk(mockRepo));
+    const actions = store.getActions();
+    expect(actions[0].type).toBe('favorite/helmets/load/pending');
+    expect(actions[1].type).toBe('favorite/helmets/load/fulfilled');
   });
 
   test('createSkinThunk dispatches the correct actions', async () => {
@@ -56,6 +67,19 @@ describe('skins thunks', () => {
     const actions = store.getActions();
     expect(actions[0].type).toBe('helmets/update/pending');
     expect(actions[1].type).toBe('helmets/update/fulfilled');
+  });
+
+  test('updateSkinsThunk dispatches the correct actions', async () => {
+    await store.dispatch(
+      updateHelmetFavoriteThunk({
+        repo: mockRepo,
+        id: '1',
+        isFavorite: true,
+      })
+    );
+    const actions = store.getActions();
+    expect(actions[0].type).toBe('helmets/update/favorite/pending');
+    expect(actions[1].type).toBe('helmets/update/favorite/fulfilled');
   });
 
   test('deleteSkinThunk dispatches the correct actions', async () => {

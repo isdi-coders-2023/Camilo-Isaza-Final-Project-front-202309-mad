@@ -2,9 +2,10 @@ import { Link, useNavigate } from 'react-router-dom';
 import './details_page copy.scss';
 import { useHelmets } from '../../hooks/useHelmets';
 import { useUsers } from '../../hooks/useUsers';
+import { Helmet } from '../../model/helmet';
 
 export default function DetailsPage() {
-  const { deleteHelmet, currentHelmet } = useHelmets();
+  const { deleteHelmet, currentHelmet, updateFavoriteHelmet } = useHelmets();
   const { loggedUser, token } = useUsers();
   const navigate = useNavigate();
 
@@ -18,11 +19,16 @@ export default function DetailsPage() {
     navigate('/helmets');
   };
 
+  const handleAddToFavorite = (currentHelmet: Helmet) => {
+    updateFavoriteHelmet(currentHelmet.id, currentHelmet.isFavorite);
+    navigate('/helmets');
+  };
+
   return (
     <>
       <div className="details">
         <div className="images">
-          <img src={currentHelmet?.images.url} alt="" width={300} />
+          <img src={currentHelmet?.images.url} alt="" width={200} />
         </div>
         <div className="info">
           <h3 className="element-property">{currentHelmet?.reference}</h3>
@@ -42,14 +48,28 @@ export default function DetailsPage() {
                   to={'/currentHelmet-edit-form/' + currentHelmet?.id}
                   style={{ textDecoration: 'none' }}
                 >
-                  <img src="/editar_icon.png" alt="edit button" width={30} />
+                  <img
+                    src="/editar_icon_white.png"
+                    alt="edit button"
+                    width={30}
+                  />
                 </Link>
                 <img
                   role="button"
-                  src="/delete_icon.png"
+                  src="/delete_icon_white.png"
                   alt="delete button"
                   width={30}
                   onClick={() => handleDeleteButton(String(currentHelmet?.id))}
+                />
+                <img
+                  className={
+                    currentHelmet?.isFavorite ? 'favorite' : 'no-favorite'
+                  }
+                  role="button"
+                  src="/add_favorite_white.png"
+                  alt="add to favorite button"
+                  width={30}
+                  onClick={() => handleAddToFavorite(currentHelmet!)}
                 />
               </div>
             ) : token ? (

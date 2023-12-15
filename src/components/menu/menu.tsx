@@ -16,6 +16,7 @@ export function Menu({ options }: Props) {
   return (
     <nav>
       <img
+        role="button"
         src="./burgerMenu.png"
         alt="icono de menu plegable"
         className="burger-icon"

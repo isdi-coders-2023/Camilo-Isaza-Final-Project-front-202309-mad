@@ -3,18 +3,15 @@ import { useUsers } from '../../hooks/useUsers';
 import './user_page.scss';
 import { useHelmets } from '../../hooks/useHelmets';
 
-export default function HomePage() {
-  const { loggedUser } = useUsers();
-
-  const { makeLogOut } = useUsers();
+export default function UserPage() {
+  const { loggedUser, makeLogOut } = useUsers();
+  const { handleCurrentHelmet } = useHelmets();
 
   const navigate = useNavigate();
   const handleLogOut = () => {
     makeLogOut();
     navigate('/home');
   };
-
-  const { handleCurrentHelmet } = useHelmets();
 
   let emptyHelmet = {
     id: '',
@@ -31,13 +28,17 @@ export default function HomePage() {
       url: '',
     },
     orders: [],
+    isFavorite: false,
   };
   return (
     <section className="user-info">
       {loggedUser?.role === 'Admin' ? (
         <Link to={'/helmet-create-form'} style={{ textDecoration: 'none' }}>
           <div className="add-helmet">
-            <button onClick={() => handleCurrentHelmet(emptyHelmet)}>
+            <button
+              role="button"
+              onClick={() => handleCurrentHelmet(emptyHelmet)}
+            >
               Añadir Casco
             </button>
           </div>
@@ -65,6 +66,7 @@ export default function HomePage() {
       <div className="logout">
         <p>Log Out</p>
         <img
+          role="button"
           src="/logout_icon.png"
           alt="logout-button"
           height={30}

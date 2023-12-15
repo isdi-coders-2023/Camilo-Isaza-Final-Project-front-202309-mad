@@ -10,6 +10,14 @@ export const loadHelmetThunk = createAsyncThunk<Helmet[], RepoHelmets>(
   }
 );
 
+export const loadFavoriteHelmetThunk = createAsyncThunk<Helmet[], RepoHelmets>(
+  'favorite/helmets/load',
+  async (repo) => {
+    const Helmets = await repo.getFavoriteHelmets();
+    return Helmets;
+  }
+);
+
 type Params = {
   repo: RepoHelmets;
   newHelmet: FormData;
@@ -32,6 +40,18 @@ export const updateHelmetThunk = createAsyncThunk<
   }
 >('helmets/update', async ({ repo, id, updatedHelmet }) => {
   const finalHelmet = await repo.updateHelmet(id, updatedHelmet);
+  return finalHelmet;
+});
+
+export const updateHelmetFavoriteThunk = createAsyncThunk<
+  Helmet,
+  {
+    repo: RepoHelmets;
+    id: Helmet['id'];
+    isFavorite: boolean;
+  }
+>('helmets/update/favorite', async ({ repo, id, isFavorite }) => {
+  const finalHelmet = await repo.updateHelmetFavorite(id, isFavorite);
   return finalHelmet;
 });
 

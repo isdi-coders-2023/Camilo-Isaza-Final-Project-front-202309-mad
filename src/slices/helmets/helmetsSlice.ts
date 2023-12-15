@@ -5,6 +5,8 @@ import {
   createHelmetThunk,
   updateHelmetThunk,
   deletHelmetThunk,
+  updateHelmetFavoriteThunk,
+  loadFavoriteHelmetThunk,
 } from './helmetsThunks';
 import { PriceRange } from '../../types/range';
 
@@ -56,6 +58,26 @@ const HelmetsSlice = createSlice({
         state.helmetsStateOption = 'error';
         return state;
       });
+
+    builder.addCase(loadFavoriteHelmetThunk.pending, (state: HelmetsState) => {
+      state.helmetsStateOption = 'loading';
+      return state;
+    }),
+      builder.addCase(
+        loadFavoriteHelmetThunk.fulfilled,
+        (state, { payload }) => {
+          state.favorites = payload;
+          state.helmetsStateOption = 'idle';
+          return state;
+        }
+      ),
+      builder.addCase(
+        loadFavoriteHelmetThunk.rejected,
+        (state: HelmetsState) => {
+          state.helmetsStateOption = 'error';
+          return state;
+        }
+      );
     builder.addCase(
       createHelmetThunk.fulfilled,
       (state: HelmetsState, { payload }: PayloadAction<Helmet>) => {
@@ -65,6 +87,15 @@ const HelmetsSlice = createSlice({
     ),
       builder.addCase(
         updateHelmetThunk.fulfilled,
+        (state: HelmetsState, { payload }: PayloadAction<Helmet>) => {
+          state.helmets[
+            state.helmets.findIndex((item) => item.id === payload.id)
+          ] = payload;
+          return state;
+        }
+      ),
+      builder.addCase(
+        updateHelmetFavoriteThunk.fulfilled,
         (state: HelmetsState, { payload }: PayloadAction<Helmet>) => {
           state.helmets[
             state.helmets.findIndex((item) => item.id === payload.id)

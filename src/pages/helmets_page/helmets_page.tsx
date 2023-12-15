@@ -6,10 +6,10 @@ export default function HelmetsPage() {
   return (
     <>
       <div className="home-page">
-        <div className="filter">
+        <div className="filter" data-testid="filter-component">
           <Filter></Filter>
         </div>
-        <div className="list">
+        <div className="list" data-testid="list-component">
           <List></List>
         </div>
       </div>

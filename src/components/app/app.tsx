@@ -9,8 +9,8 @@ export function App() {
   const menuOptions: MenuOption[] = [
     { label: 'Home', path: '/' },
     { label: 'Cascos', path: '/helmets' },
-    { label: 'Certificados', path: '/' },
-    { label: 'Sobre Nosotros', path: '/' },
+    { label: 'Certificados', path: '/certificates' },
+    { label: 'Sobre Nosotros', path: '/about-us' },
   ];
   return (
     <>

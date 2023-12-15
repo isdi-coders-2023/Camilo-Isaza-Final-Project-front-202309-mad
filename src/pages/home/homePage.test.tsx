@@ -1,18 +1,21 @@
-import { render } from '@testing-library/react';
 import '@testing-library/jest-dom';
+import { render } from '@testing-library/react';
+import { Provider } from 'react-redux';
 
+import { MemoryRouter as Router } from 'react-router-dom';
+import { store } from '../../store/store';
 import HomePage from './homePage';
-import { Home } from '../../components/home/home';
 
-jest.mock('../../components/home/home');
+describe('Given HomePage component', () => {
+  test('renders HomePage with HomeImages', () => {
+    const { getByText } = render(
+      <Router>
+        <Provider store={store}>
+          <HomePage />
+        </Provider>
+      </Router>
+    );
 
-describe('Given App component', () => {
-  describe('When we instantiate', () => {
-    beforeEach(() => {
-      render(<HomePage></HomePage>);
-    });
-    test('renders App with Footer', () => {
-      expect(Home).toHaveBeenCalled();
-    });
+    expect(getByText(/Ver Todos los cascos/i)).toBeInTheDocument();
   });
 });

@@ -37,7 +37,7 @@ export function HelmetsForm({ helmet }: PropsType) {
 
   return (
     <>
-      <div className="helmet-container">
+      <div className="helmet-container" data-testid="helmets-form">
         {helmet.id ? (
           <p className="create-helmet">Editar casco</p>
         ) : (
@@ -93,6 +93,7 @@ export function HelmetsForm({ helmet }: PropsType) {
           <div className="file-select" id="src-file1">
             <label htmlFor="images">Helmet image: </label>
             <input
+              data-testid="file"
               type="file"
               name="images"
               aria-label="Archivo"

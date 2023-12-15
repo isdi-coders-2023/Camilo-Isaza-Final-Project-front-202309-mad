@@ -13,7 +13,7 @@ export function Header({ children }: Props) {
   };
   return (
     <header>
-      <div className="header" onClick={() => handleHomePage()}>
+      <div className="header" role="button" onClick={() => handleHomePage()}>
         <h1>SUPERKASKOS</h1>
         <img src="./logo_icon.png" alt="" />
         <img src="./logo.png" alt="" />

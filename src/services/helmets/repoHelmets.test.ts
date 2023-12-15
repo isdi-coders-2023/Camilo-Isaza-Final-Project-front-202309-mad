@@ -103,9 +103,44 @@ describe('Given repo class', () => {
     });
   });
 
+  describe('When we instantiate updateHelmetFavorite with url address', () => {
+    beforeEach(() => {
+      jsonMock = jest.fn().mockResolvedValue({} as Helmet);
+      global.fetch = jest.fn().mockResolvedValueOnce({
+        ok: true,
+        json: jsonMock,
+      });
+    });
+    test('Then method updateHelmetFavorite should be used', async () => {
+      const userId = '1';
+      const isFavorite = true;
+      const expected: Helmet = {} as Helmet;
+      const repo = new RepoHelmets(mockedToken);
+      const result = await repo.updateHelmetFavorite(userId, isFavorite);
+      expect(jsonMock).toHaveBeenCalled();
+      expect(result).toStrictEqual(expected);
+    });
+  });
+  describe('When we instantiate updateHelmetFavorite and response is bad', () => {
+    beforeEach(() => {
+      global.fetch = jest.fn().mockResolvedValueOnce({
+        ok: false,
+      });
+    });
+    test('Then method updateHelmetFavorite should throw an error', async () => {
+      const userId = '1';
+      const isFavorite = true;
+
+      const repo = new RepoHelmets(mockedToken);
+      await expect(
+        repo.updateHelmetFavorite(userId, isFavorite)
+      ).rejects.toThrow();
+    });
+  });
+
   describe('When we instantiate deleteHelmet with url address', () => {
     beforeEach(() => {
-      jsonMock = jest.fn().mockResolvedValue([]);
+      jsonMock = jest.fn().mockResolvedValue(null);
       global.fetch = jest.fn().mockResolvedValueOnce({
         ok: true,
         json: jsonMock,
@@ -114,11 +149,10 @@ describe('Given repo class', () => {
     test('Then method deleteHelmet should be used', async () => {
       const userId = '1';
 
-      const expected: Helmet[] = [];
       const repo = new RepoHelmets(mockedToken);
       const result = await repo.deleteHelmet(userId);
-      expect(jsonMock).toHaveBeenCalled();
-      expect(result).toStrictEqual(expected);
+
+      expect(result).toBe(undefined);
     });
   });
   describe('When we instantiate deleteHelmet and response is bad', () => {
@@ -132,6 +166,91 @@ describe('Given repo class', () => {
 
       const repo = new RepoHelmets(mockedToken);
       await expect(repo.deleteHelmet(userId)).rejects.toThrow();
+    });
+  });
+
+  /*   describe('When we instantiate getInitialHelmets with url address', () => {
+    beforeEach(() => {
+      jsonMock = jest.fn().mockResolvedValue([]);
+      global.fetch = jest.fn().mockResolvedValueOnce({
+        ok: true,
+        json: jsonMock,
+      });
+    });
+    test('Then method getInitialHelmets should be used', async () => {
+      const expected: Helmet[] = [];
+      const repo = new RepoHelmets(mockedToken);
+      const result = await repo.getInitialHelmets();
+      expect(jsonMock).toHaveBeenCalled();
+      expect(result).toStrictEqual(expected);
+    });
+  }); */
+  describe('When we instantiate getInitialHelmets and response is bad', () => {
+    beforeEach(() => {
+      global.fetch = jest.fn().mockResolvedValueOnce({
+        ok: false,
+      });
+    });
+    test('Then method getInitialHelmets should throw an error', async () => {
+      const repo = new RepoHelmets(mockedToken);
+      await expect(repo.getInitialHelmets()).rejects.toThrow();
+    });
+  });
+  describe('When we instantiate getMoreHelmets with url address', () => {
+    beforeEach(() => {
+      jsonMock = jest.fn().mockResolvedValue([]);
+      global.fetch = jest.fn().mockResolvedValueOnce({
+        ok: true,
+        json: jsonMock,
+      });
+    });
+    test('Then method getMoreHelmets should be used', async () => {
+      const loadedCategories = ['1'];
+      const expected: Helmet[] = [];
+      const repo = new RepoHelmets(mockedToken);
+      const result = await repo.getMoreHelmets(loadedCategories);
+      expect(jsonMock).toHaveBeenCalled();
+      expect(result).toStrictEqual(expected);
+    });
+  });
+  describe('When we instantiate getMoreHelmets and response is bad', () => {
+    beforeEach(() => {
+      global.fetch = jest.fn().mockResolvedValueOnce({
+        ok: false,
+      });
+    });
+    test('Then method getMoreHelmets should throw an error', async () => {
+      const loadedCategories = ['1'];
+      const repo = new RepoHelmets(mockedToken);
+      await expect(repo.getMoreHelmets(loadedCategories)).rejects.toThrow();
+    });
+  });
+
+  describe('When we instantiate getFavoriteHelmets with url address', () => {
+    beforeEach(() => {
+      jsonMock = jest.fn().mockResolvedValue([]);
+      global.fetch = jest.fn().mockResolvedValueOnce({
+        ok: true,
+        json: jsonMock,
+      });
+    });
+    test('Then method getFavoriteHelmets should be used', async () => {
+      const expected: Helmet[] = [];
+      const repo = new RepoHelmets(mockedToken);
+      const result = await repo.getFavoriteHelmets();
+      expect(jsonMock).toHaveBeenCalled();
+      expect(result).toStrictEqual(expected);
+    });
+  });
+  describe('When we instantiate getFavoriteHelmets and response is bad', () => {
+    beforeEach(() => {
+      global.fetch = jest.fn().mockResolvedValueOnce({
+        ok: false,
+      });
+    });
+    test('Then method getFavoriteHelmets should throw an error', async () => {
+      const repo = new RepoHelmets(mockedToken);
+      await expect(repo.getFavoriteHelmets()).rejects.toThrow();
     });
   });
 });

@@ -35,6 +35,7 @@ export function Filter() {
           name="minValue"
           placeholder="Min"
           onChange={handleRangeChange}
+          role="spinbutton"
         />
       </div>
       <div className="range">
@@ -45,6 +46,7 @@ export function Filter() {
           name="maxValue"
           placeholder="Max"
           onChange={handleRangeChange}
+          role="spinbutton"
         />
       </div>
     </div>

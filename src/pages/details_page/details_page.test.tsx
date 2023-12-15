@@ -2,7 +2,6 @@ import '@testing-library/jest-dom';
 import { screen, render } from '@testing-library/react';
 import DetailsPage from './details_page';
 import { Provider } from 'react-redux';
-
 import { MemoryRouter as Router } from 'react-router-dom';
 import { store } from '../../store/store';
 import userEvent from '@testing-library/user-event';
@@ -19,7 +18,16 @@ jest.mock('../../hooks/useUsers', () => ({
 jest.mock('../../hooks/useHelmets', () => ({
   useHelmets: jest.fn().mockReturnValue({
     deleteHelmet: jest.fn(),
-    helmets: [{ id: '1', reference: 'Monaga', images: { url: '' } }],
+    updateFavoriteHelmet: jest.fn(),
+    helmets: [
+      { id: '1', reference: 'Monaga', images: { url: '' }, isFavorite: true },
+    ],
+    currentHelmet: {
+      id: '1',
+      reference: 'Monaga',
+      images: { url: '' },
+      isFavorite: true,
+    },
   }),
 }));
 
@@ -44,12 +52,18 @@ describe('Given DetailsPage component', () => {
     test('then render App with DetailsPage', () => {
       const img = screen.getAllByRole('img');
       expect(img[0]).toBeInTheDocument();
+      expect(img[1]).toBeInTheDocument();
     });
     test('', async () => {
       window.confirm = jest.fn().mockReturnValue(true);
-      const img = screen.getByRole('button');
-      await userEvent.click(img);
+      const img = screen.getAllByRole('button');
+      await userEvent.click(img[0]);
       expect(useHelmets().deleteHelmet).toHaveBeenCalled();
+    });
+    test('', async () => {
+      const img = screen.getAllByRole('button');
+      await userEvent.click(img[1]);
+      expect(useHelmets().updateFavoriteHelmet).toHaveBeenCalled();
     });
   });
   describe('When we instantiate', () => {

@@ -9,6 +9,10 @@ const UserLogin = lazy(() => import('../../pages/login_user/login_user'));
 const Register = lazy(() => import('../../pages/register_user/register_user'));
 const UserPage = lazy(() => import('../../pages/user_page/user_page'));
 const Details = lazy(() => import('../../pages/details_page/details_page'));
+const Certificates = lazy(
+  () => import('../../pages/helmetCertificate/helmetCertificate')
+);
+const AboutUs = lazy(() => import('../../pages/about-us/about-us'));
 
 export function Router() {
   return (
@@ -24,6 +28,11 @@ export function Router() {
           <Route path="/user-register" element={<Register></Register>}></Route>
           <Route path="/user-page" element={<UserPage></UserPage>}></Route>
           <Route path="/details-page/:id" element={<Details></Details>}></Route>
+          <Route
+            path="/certificates"
+            element={<Certificates></Certificates>}
+          ></Route>
+          <Route path="/about-us" element={<AboutUs></AboutUs>}></Route>
           <Route path="/*" element={<ErrorMsg></ErrorMsg>}></Route>
         </Routes>
       </Suspense>

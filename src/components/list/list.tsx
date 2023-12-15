@@ -2,29 +2,26 @@ import { useEffect, useState, useRef } from 'react';
 import './list.scss';
 import { useHelmets } from '../../hooks/useHelmets';
 import { Helmet } from '../../model/helmet';
-import { Card } from '../card/card';
+import { Card } from '../card/list_card';
 import { useUsers } from '../../hooks/useUsers';
 import { useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import { RootState } from '../../store/store';
 import { Category, helmetCategory } from '../../types/helmetCategory';
 
 export function List() {
   const { helmets, classifyHelmets, loadInitialHelmets, loadNewHelmet, range } =
     useHelmets();
+  const { makeLogOut, token } = useUsers();
   const [helmetsClasifications, setHelmetsClassifications] = useState<
     helmetCategory[]
   >([]);
-  const { token } = useSelector((state: RootState) => state.usersState);
-  const { makeLogOut } = useUsers();
+  const [loadedCategories, setLoadedCategories] = useState<Category[]>([]);
+
   const navigate = useNavigate();
   const containerRef = useRef<HTMLDivElement>(null);
-  const [loadedCategories, setLoadedCategories] = useState<Category[]>([]);
 
   useEffect(() => {
     const fetchData = async () => {
-      const initialHelmets = await loadInitialHelmets();
-      console.log({ initialHelmets });
+      await loadInitialHelmets();
     };
 
     fetchData();
@@ -33,6 +30,7 @@ export function List() {
   useEffect(() => {
     const classify = async () => {
       const classifications = await classifyHelmets(helmets);
+      console.log('Classifications:', classifications);
       setHelmetsClassifications(classifications);
       const loaded = loadCategory(classifications);
       setLoadedCategories(loaded);
@@ -47,15 +45,13 @@ export function List() {
         categoriesWithHelmets.push(classification.category);
       }
     }
+
     return categoriesWithHelmets;
   };
 
   const getMoreCategories = async () => {
-    console.log('hola getMoreCategories');
     try {
-      console.log(loadedCategories);
       const newCategory = await loadNewHelmet(loadedCategories);
-      console.log(newCategory);
       setLoadedCategories([...loadedCategories, newCategory!.category]);
       setHelmetsClassifications([...helmetsClasifications, newCategory!]);
     } catch (error) {
@@ -87,7 +83,11 @@ export function List() {
     >
       {helmetsClasifications.map((category) =>
         category.helmets.length > 0 ? (
-          <div key={category.category} className="category-list">
+          <div
+            data-testid="category-list"
+            key={category.category}
+            className="category-list"
+          >
             <p className="category">{category.category}</p>
             <div className="helmets-list-container">
               <ul className="helmets-list">

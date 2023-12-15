@@ -6,6 +6,8 @@ import {
   updateHelmetThunk,
   createHelmetThunk,
   deletHelmetThunk,
+  updateHelmetFavoriteThunk,
+  loadFavoriteHelmetThunk,
 } from '../slices/helmets/helmetsThunks';
 import { AppDispatch, RootState } from '../store/store';
 import { Helmet } from '../model/helmet';
@@ -15,9 +17,8 @@ import { PriceRange } from '../types/range';
 
 export function useHelmets() {
   const dispatch = useDispatch<AppDispatch>();
-  const { helmets, helmetsStateOption, currentHelmet, range } = useSelector(
-    (state: RootState) => state.helmetsState
-  );
+  const { helmets, helmetsStateOption, currentHelmet, range, favorites } =
+    useSelector((state: RootState) => state.helmetsState);
   const { token } = useSelector((state: RootState) => state.usersState);
   const repo = useMemo(() => new RepoHelmets(token), []);
 
@@ -27,37 +28,38 @@ export function useHelmets() {
     } catch (error) {}
   }, [repo]);
 
-  const loadInitialHelmets = async () => {
+  const loadFavoriteHelmets = useCallback(async () => {
     try {
-      await dispatch(loadHelmetThunk(repo));
-    } catch (error) {
-      console.log((error as Error).message);
-    }
-  };
+      dispatch(loadFavoriteHelmetThunk(repo));
+    } catch (error) {}
+  }, [repo]);
 
-  const loadNewHelmet = async (loadedCategories: string[]) => {
+  const loadInitialHelmets = useCallback(async () => {
     try {
-      console.log(loadedCategories);
-      const result = await repo.getMoreHelmets(loadedCategories);
+      dispatch(loadHelmetThunk(repo));
+    } catch (error) {}
+  }, [repo]);
 
-      return result;
-    } catch (error) {
-      console.log((error as Error).message);
-    }
-  };
+  const loadNewHelmet = useCallback(
+    async (loadedCategories: string[]) => {
+      try {
+        const result = await repo.getMoreHelmets(loadedCategories);
+
+        return result;
+      } catch (error) {}
+    },
+    [repo]
+  );
 
   const createHelmet = async (newHelmet: FormData) => {
     try {
-      console.log(newHelmet);
       dispatch(
         createHelmetThunk({
           repo,
           newHelmet,
         })
       );
-    } catch (error) {
-      console.log((error as Error).message);
-    }
+    } catch (error) {}
   };
 
   const updateHelmet = async (id: Helmet['id'], helmet: FormData) => {
@@ -70,9 +72,25 @@ export function useHelmets() {
           updatedHelmet: helmet,
         })
       );
-    } catch (error) {
-      console.log((error as Error).message);
-    }
+    } catch (error) {}
+  };
+
+  const updateFavoriteHelmet = async (
+    id: Helmet['id'],
+    isFavorite: boolean
+  ) => {
+    try {
+      console.log(isFavorite);
+      isFavorite = !isFavorite;
+      console.log(isFavorite);
+      dispatch(
+        updateHelmetFavoriteThunk({
+          id,
+          repo,
+          isFavorite,
+        })
+      );
+    } catch (error) {}
   };
 
   const deleteHelmet = async (id: Helmet['id']) => {
@@ -83,9 +101,7 @@ export function useHelmets() {
           repo,
         })
       );
-    } catch (error) {
-      console.log((error as Error).message);
-    }
+    } catch (error) {}
   };
 
   const classifyHelmets = async (
@@ -127,7 +143,6 @@ export function useHelmets() {
   };
 
   const rangeChange = (range: PriceRange) => {
-    console.log(range);
     dispatch(setRange(range));
   };
 
@@ -145,5 +160,8 @@ export function useHelmets() {
     rangeChange,
     currentHelmet,
     range,
+    updateFavoriteHelmet,
+    loadFavoriteHelmets,
+    favorites,
   };
 }

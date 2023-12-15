@@ -19,7 +19,7 @@
 
     &:hover {
       p {
-        color: #cc1414;
+        color: red;
         font-weight: 900;
       }
     }
@@ -30,14 +30,19 @@
         display: flex;
         justify-content: space-evenly;
         img {
-          border-radius: 5px;
+          background-color: red;
+          border: 1px solid black;
+          border-radius: 8px;
           padding-inline: 8px;
           padding-top: 5px;
-          margin-inline: 15px;
+          margin-inline: 11px;
           padding-bottom: 8px;
-          background-color: white;
-          &:hover {
-            background-color: #cc1414;
+          background-color: red;
+          &.favorite {
+            background-color: gold;
+          }
+          &.no-favorite {
+            background-color: red;
           }
         }
       }
@@ -50,7 +55,7 @@
         max-width: 200px;
         gap: 10px;
         align-items: center;
-        background-color: #cc1414;
+        background-color: red;
         border: 1px solid black;
         border-radius: 8px;
         padding: 8px;

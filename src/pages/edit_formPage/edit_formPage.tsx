@@ -6,8 +6,16 @@ export default function EditFormPage() {
   const { currentHelmet } = useHelmets();
 
   if (!currentHelmet?.id) {
-    return <HelmetsForm helmet={currentHelmet!} />;
+    return (
+      <div>
+        <HelmetsForm helmet={currentHelmet!} />;
+      </div>
+    );
   } else {
-    return <HelmetsForm helmet={currentHelmet} />;
+    return (
+      <div>
+        <HelmetsForm helmet={currentHelmet} />;
+      </div>
+    );
   }
 }

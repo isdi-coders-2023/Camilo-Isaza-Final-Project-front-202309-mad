@@ -15,31 +15,6 @@ export class RepoHelmets {
     return initialHelmets;
   }
 
-  async getMoreHelmets(loadedCategories: string[]): Promise<helmetCategory> {
-    console.log(loadedCategories);
-    try {
-      const response = await fetch(`${this.url}/moreHelmets`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          loadedCategories: loadedCategories,
-        }),
-      });
-      console.log('hola');
-      if (!response.ok) {
-        throw new Error(response.status + ' ' + response.statusText);
-      }
-
-      const data = await response.json();
-      console.log(data);
-      return data;
-    } catch (error) {
-      throw new Error('Error fetching more helmets: ');
-    }
-  }
-
   private async fetchInitialCategories(): Promise<string[]> {
     const response = await fetch(`${this.url}/initialCategories`);
     if (!response.ok) {
@@ -64,9 +39,39 @@ export class RepoHelmets {
     const data = await response.json();
     return data.helmets;
   }
+  async getMoreHelmets(loadedCategories: string[]): Promise<helmetCategory> {
+    try {
+      const response = await fetch(`${this.url}/moreHelmets`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          loadedCategories: loadedCategories,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error(response.status + ' ' + response.statusText);
+      }
+
+      const data = await response.json();
+
+      return data;
+    } catch (error) {
+      throw new Error('Error fetching more helmets: ');
+    }
+  }
 
   async getHelmets(): Promise<Helmet[]> {
     const response = await fetch(this.url);
+    if (!response.ok)
+      throw new Error(response.status + ' ' + response.statusText);
+    return response.json();
+  }
+
+  async getFavoriteHelmets(): Promise<Helmet[]> {
+    const response = await fetch(`${this.url}/promotions`);
     if (!response.ok)
       throw new Error(response.status + ' ' + response.statusText);
     return response.json();
@@ -96,6 +101,25 @@ export class RepoHelmets {
       method: 'PATCH',
       body: updatedHelmet,
       headers: {
+        Authorization: 'Bearer ' + this.token,
+      },
+    });
+    if (!response.ok)
+      throw new Error(response.status + ' ' + response.statusText);
+    return response.json();
+  }
+
+  async updateHelmetFavorite(
+    id: Helmet['id'],
+    isFavorite: boolean
+  ): Promise<Helmet> {
+    const finalUrl = `${this.url}/${id}/favorite`;
+    console.log(isFavorite);
+    const response = await fetch(finalUrl, {
+      method: 'PATCH',
+      body: JSON.stringify({ isFavorite }),
+      headers: {
+        'Content-Type': 'application/json',
         Authorization: 'Bearer ' + this.token,
       },
     });
