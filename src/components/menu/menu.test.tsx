@@ -1,29 +1,39 @@
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import '@testing-library/jest-dom';
-
+import userEvent from '@testing-library/user-event';
 import { Provider } from 'react-redux';
 import { store } from '../../store/store';
 import { Menu } from './menu';
 
 describe('Menu Component', () => {
-  test('renders menu with mock children', () => {
+  describe('', () => {
     const mockOptions = [{ label: 'a', path: 'b' }];
-    render(
-      <Provider store={store}>
-        <MemoryRouter>
-          <Menu options={mockOptions}>
-            <div>Test Children</div>
-          </Menu>
-        </MemoryRouter>
-      </Provider>
-    );
+    beforeEach(() => {
+      render(
+        <Provider store={store}>
+          <MemoryRouter>
+            <Menu options={mockOptions}>
+              <div>Test Children</div>
+            </Menu>
+          </MemoryRouter>
+        </Provider>
+      );
+    });
+    test('renders menu with mock children', () => {
+      const linkElement = screen.getByRole('link');
+      const menuIcon = screen.getByAltText('icono de menu plegable');
 
-    const menuIcon = screen.getByAltText('icono de menu plegable');
-    expect(menuIcon).toBeInTheDocument();
+      expect(linkElement).toBeInTheDocument();
+      expect(menuIcon).toBeInTheDocument();
+    });
 
-    const linkElements = screen.getByRole('link');
+    test('renders burgerMenu and toggles menu on click', async () => {
+      const menuIcon = screen.getByAltText('icono de menu plegable');
+      await userEvent.click(menuIcon);
 
-    expect(linkElements).toBeInTheDocument();
+      const menuList = screen.getByRole('list');
+      expect(menuList).toBeInTheDocument();
+    });
   });
 });

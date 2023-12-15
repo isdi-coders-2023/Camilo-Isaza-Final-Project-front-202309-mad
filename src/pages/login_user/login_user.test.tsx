@@ -1,31 +1,33 @@
+import { fireEvent, render, screen } from '@testing-library/react';
+
+import userEvent from '@testing-library/user-event';
+import { BrowserRouter as Router } from 'react-router-dom';
 import '@testing-library/jest-dom';
-import { render, screen } from '@testing-library/react';
+import { Provider } from 'react-redux';
 import LoginForm from './login_user';
 import { store } from '../../store/store';
-import { Provider } from 'react-redux';
-import { MemoryRouter } from 'react-router-dom';
-import '@testing-library/react';
 import { useUsers } from '../../hooks/useUsers';
 
-jest.mock('../../components/home/home');
-jest.mock('../../hooks/useUsers');
+jest.mock('../../hooks/useUsers', () => ({
+  useUsers: jest.fn().mockReturnValue({
+    login: jest.fn(),
+  }),
+}));
 
-describe('Given RegisterForm component', () => {
-  test('It should be in the document', () => {
-    const mockRegister = jest.fn();
-    (useUsers as jest.Mock).mockReturnValue({
-      register: mockRegister,
-    });
-
-    render(
-      <MemoryRouter>
-        <Provider store={store}>
-          <LoginForm />
-        </Provider>
-      </MemoryRouter>
-    );
-
-    const element = screen.getByTestId('login-form');
-    expect(element).toBeInTheDocument();
+describe('Login Component', () => {
+  render(
+    <Router>
+      <Provider store={store}>
+        <LoginForm></LoginForm>
+      </Provider>
+    </Router>
+  );
+  test('Then it submits form with correct values', async () => {
+    const form = screen.getByRole('form');
+    const input = screen.getAllByRole('textbox');
+    await userEvent.type(input[0], 'test');
+    await userEvent.click(screen.getByRole('button'));
+    await fireEvent.submit(form);
+    expect(useUsers().login).toHaveBeenCalled();
   });
 });

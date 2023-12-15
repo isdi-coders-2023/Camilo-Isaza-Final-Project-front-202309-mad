@@ -16,12 +16,13 @@ export function Menu({ options }: Props) {
   return (
     <nav>
       <img
+        role="button"
         src="./burgerMenu.png"
         alt="icono de menu plegable"
         className="burger-icon"
         onClick={toggleMenu}
-        height={40}
-        width={40}
+        height={30}
+        width={30}
       />
       <ul className={isMenuOpen ? 'open' : ''}>
         {options.map((item) => (

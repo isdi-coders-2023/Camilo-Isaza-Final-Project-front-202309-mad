@@ -1,13 +1,16 @@
-import { useDispatch } from 'react-redux';
-import { AppDispatch } from '../store/store';
+import { useDispatch, useSelector } from 'react-redux';
+import { AppDispatch, RootState } from '../store/store';
 
-import { loginThunk, loginTokenThunk } from '../slices/users.thunks';
+import { loginThunk, loginTokenThunk } from '../slices/users/users.thunks';
 import { RepoUsers } from '../services/users/repoUsers';
 import { LoginUser } from '../model/user';
 import { Storage } from '../services/storage';
-import * as ac from '../slices/users.slice';
+import * as ac from '../slices/users/users.slice';
 
 export function useUsers() {
+  const { loggedUser, token } = useSelector(
+    (state: RootState) => state.usersState
+  );
   const dispatch = useDispatch<AppDispatch>();
   const repo = new RepoUsers();
   const userStore = new Storage<{ token: string }>('user');
@@ -21,6 +24,7 @@ export function useUsers() {
   };
 
   const login = (loginUser: LoginUser) => {
+    console.log(loginUser);
     dispatch(loginThunk({ loginUser, repo, userStore }));
   };
 
@@ -32,7 +36,8 @@ export function useUsers() {
     register,
     login,
     loginWithToken,
-
+    loggedUser,
     makeLogOut,
+    token,
   };
 }

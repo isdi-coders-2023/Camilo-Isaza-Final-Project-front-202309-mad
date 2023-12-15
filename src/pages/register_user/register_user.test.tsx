@@ -1,33 +1,35 @@
+import { fireEvent, render, screen } from '@testing-library/react';
+
+import userEvent from '@testing-library/user-event';
+import { BrowserRouter as Router } from 'react-router-dom';
 import '@testing-library/jest-dom';
-import { render, screen } from '@testing-library/react';
-import RegisterForm from './register_user';
-import { store } from '../../store/store';
 import { Provider } from 'react-redux';
-import { MemoryRouter } from 'react-router-dom';
-import '@testing-library/react';
+import { store } from '../../store/store';
 import { useUsers } from '../../hooks/useUsers';
+import RegisterForm from './register_user';
 
-jest.mock('../../components/home/home');
-jest.mock('../../hooks/useUsers');
+jest.mock('../../hooks/useUsers', () => ({
+  useUsers: jest.fn().mockReturnValue({
+    register: jest.fn(),
+  }),
+}));
 
-describe('Given RegisterForm component', () => {
-  test('It should be in the document', () => {
-    const mockRegister = jest.fn();
-    (useUsers as jest.Mock).mockReturnValue({
-      register: mockRegister,
-    });
-
-    render(
-      <MemoryRouter>
-        <Provider store={store}>
-          <RegisterForm />
-        </Provider>
-      </MemoryRouter>
-    );
-
-    const element = screen.getByTestId('register-form');
-    expect(element).toBeInTheDocument();
-
-    /*     expect(mockRegister).toHaveBeenCalled(); */
+describe('Register Component', () => {
+  render(
+    <Router>
+      <Provider store={store}>
+        <RegisterForm></RegisterForm>
+      </Provider>
+    </Router>
+  );
+  test('Then it submits form with correct values', async () => {
+    const form = screen.getByRole('form');
+    const input = screen.getAllByRole('textbox');
+    await userEvent.type(input[0], 'test');
+    await userEvent.type(input[1], 'testing');
+    await userEvent.type(input[2], 'test@example.com');
+    await userEvent.click(screen.getByRole('button'));
+    await fireEvent.submit(form);
+    expect(useUsers().register).toHaveBeenCalled();
   });
 });
