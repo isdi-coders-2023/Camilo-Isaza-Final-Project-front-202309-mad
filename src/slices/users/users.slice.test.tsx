@@ -24,18 +24,18 @@ describe('Given...', () => {
     };
 
     test('Then it should ...', async () => {
-      const data = { ...sharedData, loginUser: {} as LoginUser };
-      await store.dispatch(loginThunk(data));
-      expect(data.repo.login).toHaveBeenCalled();
-      expect(data.userStore.set).toHaveBeenCalled();
-      data.repo.login;
+      const data3 = { ...sharedData, loginUser: {} as LoginUser };
+      await store.dispatch(loginThunk(data3));
+      expect(data3.repo.login).toHaveBeenCalled();
+      expect(data3.userStore.set).toHaveBeenCalled();
+      data3.repo.login;
     });
     test('Then it should ...', async () => {
-      const data = { ...sharedData, token: '' };
-      await store.dispatch(loginTokenThunk(data));
-      expect(data.repo.login).toHaveBeenCalled();
-      expect(data.userStore.set).toHaveBeenCalled();
-      data.repo.login;
+      const data4 = { ...sharedData, token: '' };
+      await store.dispatch(loginTokenThunk(data4));
+      expect(data4.repo.login).toHaveBeenCalled();
+      expect(data4.userStore.set).toHaveBeenCalled();
+      data4.repo.login;
     });
   });
 

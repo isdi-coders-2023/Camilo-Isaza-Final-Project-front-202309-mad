@@ -41,30 +41,29 @@ describe('Given useUsers Hook', () => {
   });
 
   describe('When we click button makeLogOut', () => {
-    test('Then the dispacht should have been called', async () => {
+    test('Then the dispacht should have been called.', async () => {
       await userEvent.click(elements[0]);
       expect(useDispatch()).toHaveBeenCalled();
     });
   });
 
   describe('When we click button login', () => {
-    test('Then the dispacht should have been called', async () => {
+    test('Then the dispacht should have been called..', async () => {
       await userEvent.click(elements[1]);
       expect(useDispatch()).toHaveBeenCalled();
     });
   });
 
   describe('When we click button loginWithToken', () => {
-    test('Then the dispacht should have been called', async () => {
+    test('Then the dispacht should have been called...', async () => {
       Storage.prototype.get = jest.fn().mockReturnValue('test');
-
       await userEvent.click(elements[2]);
       expect(useDispatch()).toHaveBeenCalled();
     });
   });
 
   describe('When we click button register ', () => {
-    test('Then the dispacht should have been called', async () => {
+    test('Then the dispacht should have been called....', async () => {
       RepoUsers.prototype.createUser = jest.fn();
 
       await userEvent.click(elements[3]);

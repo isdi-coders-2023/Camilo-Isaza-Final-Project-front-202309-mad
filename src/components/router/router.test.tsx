@@ -5,10 +5,10 @@ import { Router } from './router';
 
 describe('Given AppRoutes component', () => {
   describe('When we navigate to Helmets page', () => {
-    const MockedHomeComponent = jest.fn().mockReturnValue(<h1>Helmets</h1>);
+    const MockedHelmetsComponent = jest.fn().mockReturnValue(<h1>Helmets</h1>);
     jest.mock(
       '../../pages/helmets_page/helmets_page',
-      () => MockedHomeComponent
+      () => MockedHelmetsComponent
     );
     let element: HTMLElement;
     beforeEach(async () => {
@@ -22,18 +22,18 @@ describe('Given AppRoutes component', () => {
       element = screen.getByText('Helmets');
     });
     test('Then the component should been called', () => {
-      expect(MockedHomeComponent).toHaveBeenCalled();
+      expect(MockedHelmetsComponent).toHaveBeenCalled();
       expect(element).toBeInTheDocument();
     });
   });
 
   describe('When we navigate to Certificates page', () => {
-    const MockedHomeComponent = jest
+    const MockedCertificateComponent = jest
       .fn()
       .mockReturnValue(<h1>Certificates</h1>);
     jest.mock(
       '../../pages/helmetCertificate/helmetCertificate',
-      () => MockedHomeComponent
+      () => MockedCertificateComponent
     );
     let element: HTMLElement;
     beforeEach(async () => {
@@ -47,16 +47,16 @@ describe('Given AppRoutes component', () => {
       element = screen.getByText('Certificates');
     });
     test('Then the component should been called', () => {
-      expect(MockedHomeComponent).toHaveBeenCalled();
+      expect(MockedCertificateComponent).toHaveBeenCalled();
       expect(element).toBeInTheDocument();
     });
   });
 
-  describe('When we navigate to Certificates page', () => {
-    const MockedHomeComponent = jest.fn().mockReturnValue(<h1>Edit</h1>);
+  describe('When we navigate to Edit page', () => {
+    const MockedEditComponent = jest.fn().mockReturnValue(<h1>Edit</h1>);
     jest.mock(
       '../../pages/edit_formPage/edit_formPage',
-      () => MockedHomeComponent
+      () => MockedEditComponent
     );
     let element: HTMLElement;
     beforeEach(async () => {
@@ -73,14 +73,14 @@ describe('Given AppRoutes component', () => {
       element = screen.getByText('Edit');
     });
     test('Then the component should been called', () => {
-      expect(MockedHomeComponent).toHaveBeenCalled();
+      expect(MockedEditComponent).toHaveBeenCalled();
       expect(element).toBeInTheDocument();
     });
   });
 
   describe('When we navigate to login page', () => {
-    const MockedHomeComponent = jest.fn().mockReturnValue(<h1>Login</h1>);
-    jest.mock('../../pages/login_user/login_user', () => MockedHomeComponent);
+    const MockedLoginComponent = jest.fn().mockReturnValue(<h1>Login</h1>);
+    jest.mock('../../pages/login_user/login_user', () => MockedLoginComponent);
     let element: HTMLElement;
     beforeEach(async () => {
       await act(async () => {
@@ -93,16 +93,18 @@ describe('Given AppRoutes component', () => {
       element = screen.getByText('Login');
     });
     test('Then the component should been called', () => {
-      expect(MockedHomeComponent).toHaveBeenCalled();
+      expect(MockedLoginComponent).toHaveBeenCalled();
       expect(element).toBeInTheDocument();
     });
   });
 
   describe('When we navigate to register page', () => {
-    const MockedHomeComponent = jest.fn().mockReturnValue(<h1>register</h1>);
+    const MockedRegisterComponent = jest
+      .fn()
+      .mockReturnValue(<h1>register</h1>);
     jest.mock(
       '../../pages/register_user/register_user',
-      () => MockedHomeComponent
+      () => MockedRegisterComponent
     );
     let element: HTMLElement;
     beforeEach(async () => {
@@ -116,16 +118,16 @@ describe('Given AppRoutes component', () => {
       element = screen.getByText('register');
     });
     test('Then the component should been called', () => {
-      expect(MockedHomeComponent).toHaveBeenCalled();
+      expect(MockedRegisterComponent).toHaveBeenCalled();
       expect(element).toBeInTheDocument();
     });
   });
 
   describe('When we navigate to Details page', () => {
-    const MockedHomeComponent = jest.fn().mockReturnValue(<h1>details</h1>);
+    const MockedDetailsComponent = jest.fn().mockReturnValue(<h1>details</h1>);
     jest.mock(
       '../../pages/details_page/details_page',
-      () => MockedHomeComponent
+      () => MockedDetailsComponent
     );
     let element: HTMLElement;
     beforeEach(async () => {
@@ -139,14 +141,14 @@ describe('Given AppRoutes component', () => {
       element = screen.getByText('details');
     });
     test('Then the component should been called', () => {
-      expect(MockedHomeComponent).toHaveBeenCalled();
+      expect(MockedDetailsComponent).toHaveBeenCalled();
       expect(element).toBeInTheDocument();
     });
   });
 
   describe('When we navigate to user page', () => {
-    const MockedHomeComponent = jest.fn().mockReturnValue(<h1>user</h1>);
-    jest.mock('../../pages/user_page/user_page', () => MockedHomeComponent);
+    const MockeduserpageComponent = jest.fn().mockReturnValue(<h1>user</h1>);
+    jest.mock('../../pages/user_page/user_page', () => MockeduserpageComponent);
     let element: HTMLElement;
     beforeEach(async () => {
       await act(async () => {
@@ -159,14 +161,14 @@ describe('Given AppRoutes component', () => {
       element = screen.getByText('user');
     });
     test('Then the component should been called', () => {
-      expect(MockedHomeComponent).toHaveBeenCalled();
+      expect(MockeduserpageComponent).toHaveBeenCalled();
       expect(element).toBeInTheDocument();
     });
   });
 
   describe('When we navigate to About us page', () => {
-    const MockedHomeComponent = jest.fn().mockReturnValue(<h1>about</h1>);
-    jest.mock('../../pages/about-us/about-us', () => MockedHomeComponent);
+    const MockedAboutUsComponent = jest.fn().mockReturnValue(<h1>about</h1>);
+    jest.mock('../../pages/about-us/about-us', () => MockedAboutUsComponent);
     let element: HTMLElement;
     beforeEach(async () => {
       await act(async () => {
@@ -179,7 +181,7 @@ describe('Given AppRoutes component', () => {
       element = screen.getByText('about');
     });
     test('Then the component should been called', () => {
-      expect(MockedHomeComponent).toHaveBeenCalled();
+      expect(MockedAboutUsComponent).toHaveBeenCalled();
       expect(element).toBeInTheDocument();
     });
   });
@@ -204,9 +206,9 @@ describe('Given AppRoutes component', () => {
     });
   });
 
-  describe('When we navigate to home page', () => {
-    const MockedHomeComponent = jest.fn().mockReturnValue(<h1>error</h1>);
-    jest.mock('../../pages/error_page/errorpage', () => MockedHomeComponent);
+  describe('When we navigate to error page', () => {
+    const MockedErrorComponent = jest.fn().mockReturnValue(<h1>error</h1>);
+    jest.mock('../../pages/error_page/errorpage', () => MockedErrorComponent);
     let element: HTMLElement;
     beforeEach(async () => {
       await act(async () => {
@@ -219,7 +221,7 @@ describe('Given AppRoutes component', () => {
       element = screen.getByText('error');
     });
     test('Then the component should been called', () => {
-      expect(MockedHomeComponent).toHaveBeenCalled();
+      expect(MockedErrorComponent).toHaveBeenCalled();
       expect(element).toBeInTheDocument();
     });
   });

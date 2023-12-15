@@ -11,7 +11,7 @@ import { HomeCard } from './home_card';
 
 jest.mock('../../../hooks/useUsers', () => ({
   useUsers: jest.fn().mockReturnValue({
-    token: 'token',
+    token: 'token2',
   }),
 }));
 
@@ -22,17 +22,17 @@ jest.mock('../../../hooks/useHelmets', () => ({
 }));
 
 describe('Given card component when it is rendered', () => {
-  const mockHelmet = {
-    reference: 'MockReference',
-    price: 50,
-    images: { url: 'mockImageUrl' },
+  const mockHelmet2 = {
+    reference: 'MockReference2',
+    price: 60,
+    images: { url: 'mockImageUrl2' },
   } as Helmet;
 
   test('renders the card for a User', async () => {
     render(
       <Provider store={store}>
         <Router>
-          <HomeCard helmet={mockHelmet}></HomeCard>
+          <HomeCard helmet={mockHelmet2}></HomeCard>
         </Router>
       </Provider>
     );
@@ -40,8 +40,8 @@ describe('Given card component when it is rendered', () => {
     const addToCartTextElement = screen.getByText('Añadir al carrito');
     expect(addToCartTextElement).toBeInTheDocument();
 
-    const images = screen.getAllByRole('button');
-    await userEvent.click(images[0]);
+    const images2 = screen.getAllByRole('button');
+    await userEvent.click(images2[0]);
     expect(useHelmets().handleCurrentHelmet).toHaveBeenCalled();
   });
 });

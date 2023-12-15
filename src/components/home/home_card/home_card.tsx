@@ -37,20 +37,20 @@ export function HomeCard({ helmet }: PropsType) {
           <div className="card-buttons">
             {token ? (
               <div className="add-to-cart">
-                <p>Añadir al carrito</p>
+                <p>Añadir al carrito.</p>
                 <img
                   src="/shop_icon_white.png"
-                  alt="add to cart button"
+                  alt="add to cart button."
                   width={20}
                 />
               </div>
             ) : (
               <Link to={'/user-login'} style={{ textDecoration: 'none' }}>
                 <div className="add-to-cart">
-                  <p>Añadir al carrito</p>
+                  <p>Añadir al carrito.</p>
                   <img
                     src="/shop_icon_white.png"
-                    alt="add to cart button"
+                    alt="add to cart button."
                     width={20}
                   />
                 </div>

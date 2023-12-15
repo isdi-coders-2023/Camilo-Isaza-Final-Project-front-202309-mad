@@ -14,54 +14,54 @@ import {
 describe('Given helmetsReducer', () => {
   describe(' When skins/load/pending action is dispacth  ', () => {
     test('Then the new state will be returned ', () => {
-      const action = { type: 'helmets/load/pending' };
+      const actionP = { type: 'helmets/load/pending' };
       const state: HelmetsState = {} as HelmetsState;
-      const result = helmetsReducer(state, action);
-      expect(result.helmetsStateOption).toBe('loading');
+      const resultP = helmetsReducer(state, actionP);
+      expect(resultP.helmetsStateOption).toBe('loading');
     });
   });
 
   test('Then the new state will be returned ', () => {
-    const action = { type: 'helmets/load/rejected' };
+    const actionR = { type: 'helmets/load/rejected' };
     const state: HelmetsState = {} as HelmetsState;
-    const result = helmetsReducer(state, action);
-    expect(result.helmetsStateOption).toBe('error');
+    const resultR = helmetsReducer(state, actionR);
+    expect(resultR.helmetsStateOption).toBe('error');
   });
 
   test('Then the new state will be returned ', () => {
-    const action = {
+    const actionF = {
       type: 'helmets/load/fulfilled',
       payload: [{}] as unknown as Helmet,
     };
     const state: HelmetsState = {} as HelmetsState;
-    const result = helmetsReducer(state, action);
-    expect(result.helmetsStateOption).toBe('idle');
+    const resultF = helmetsReducer(state, actionF);
+    expect(resultF.helmetsStateOption).toBe('idle');
   });
 
   describe(' When helmets/favorites/helmets/load/pending action is dispacth  ', () => {
     test('Then the new state will be returned ', () => {
-      const action = { type: 'favorite/helmets/load/pending' };
+      const actionFP = { type: 'favorite/helmets/load/pending' };
       const state: HelmetsState = {} as HelmetsState;
-      const result = helmetsReducer(state, action);
-      expect(result.helmetsStateOption).toBe('loading');
+      const resultFP = helmetsReducer(state, actionFP);
+      expect(resultFP.helmetsStateOption).toBe('loading');
     });
   });
 
   test('Then the new state will be returned ', () => {
-    const action = { type: 'favorite/helmets/load/rejected' };
+    const actionFR = { type: 'favorite/helmets/load/rejected' };
     const state: HelmetsState = {} as HelmetsState;
-    const result = helmetsReducer(state, action);
-    expect(result.helmetsStateOption).toBe('error');
+    const resultFR = helmetsReducer(state, actionFR);
+    expect(resultFR.helmetsStateOption).toBe('error');
   });
 
   test('Then the new state will be returned ', () => {
-    const action = {
+    const actionFF = {
       type: 'favorite/helmets/load/fulfilled',
       payload: [{}] as unknown as Helmet,
     };
     const state: HelmetsState = {} as HelmetsState;
-    const result = helmetsReducer(state, action);
-    expect(result.helmetsStateOption).toBe('idle');
+    const resultFF = helmetsReducer(state, actionFF);
+    expect(resultFF.helmetsStateOption).toBe('idle');
   });
 
   describe('When createSkinThunk.fulfilled action is dispatched', () => {
