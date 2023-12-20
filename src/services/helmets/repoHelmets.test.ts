@@ -33,6 +33,36 @@ describe('Given repo class', () => {
     });
   });
 
+  describe('When we instantiate getHelmetById with url address', () => {
+    beforeEach(() => {
+      jsonMock = jest.fn().mockResolvedValue([]);
+      global.fetch = jest.fn().mockResolvedValueOnce({
+        ok: true,
+        json: jsonMock,
+      });
+    });
+    test('Then method getUsers should be used', async () => {
+      const expected: Helmet[] = [];
+      const repo = new RepoHelmets(mockedToken);
+      const mockId = '1';
+      const result = await repo.getHelmetById(mockId);
+      expect(jsonMock).toHaveBeenCalled();
+      expect(result).toStrictEqual(expected);
+    });
+  });
+  describe('When we instantiate getHelmetById and response is bad', () => {
+    beforeEach(() => {
+      global.fetch = jest.fn().mockResolvedValueOnce({
+        ok: false,
+      });
+    });
+    test('Then method getCountry should throw an error', async () => {
+      const repo = new RepoHelmets(mockedToken);
+      const mockId = '1';
+      await expect(repo.getHelmetById(mockId)).rejects.toThrow();
+    });
+  });
+
   describe('When we instantiate createHelmet with url address', () => {
     beforeEach(() => {
       jsonMock = jest.fn().mockResolvedValue({} as Helmet);
@@ -169,31 +199,31 @@ describe('Given repo class', () => {
     });
   });
 
-  /*   describe('When we instantiate getInitialHelmets with url address', () => {
+  describe('When we instantiate getInitialHelmets with url address', () => {
     beforeEach(() => {
       jsonMock = jest.fn().mockResolvedValue([]);
-      global.fetch = jest.fn().mockResolvedValueOnce({
+      global.fetch = jest.fn().mockResolvedValue({
         ok: true,
         json: jsonMock,
       });
     });
     test('Then method getInitialHelmets should be used', async () => {
-      const expected: Helmet[] = [];
+      const expected = undefined;
       const repo = new RepoHelmets(mockedToken);
       const result = await repo.getInitialHelmets();
       expect(jsonMock).toHaveBeenCalled();
       expect(result).toStrictEqual(expected);
     });
-  }); */
+  });
   describe('When we instantiate getInitialHelmets and response is bad', () => {
     beforeEach(() => {
-      global.fetch = jest.fn().mockResolvedValueOnce({
+      global.fetch = jest.fn().mockResolvedValue({
         ok: false,
       });
     });
     test('Then method getInitialHelmets should throw an error', async () => {
       const repo = new RepoHelmets(mockedToken);
-      await expect(repo.getInitialHelmets()).rejects.toThrow();
+      await expect(repo.getInitialHelmets()).rejects.toThrow(Error);
     });
   });
   describe('When we instantiate getMoreHelmets with url address', () => {

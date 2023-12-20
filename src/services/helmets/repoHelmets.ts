@@ -32,9 +32,6 @@ export class RepoHelmets {
     const response = await fetch(
       `${this.url}/helmetsByCategories?categories=${categories.join(',')}`
     );
-    if (!response.ok) {
-      throw new Error(response.status + ' ' + response.statusText);
-    }
 
     const data = await response.json();
     return data.helmets;
@@ -65,6 +62,13 @@ export class RepoHelmets {
 
   async getHelmets(): Promise<Helmet[]> {
     const response = await fetch(this.url);
+    if (!response.ok)
+      throw new Error(response.status + ' ' + response.statusText);
+    return response.json();
+  }
+
+  async getHelmetById(id: Helmet['id']): Promise<Helmet> {
+    const response = await fetch(`${this.url}/${id}`);
     if (!response.ok)
       throw new Error(response.status + ' ' + response.statusText);
     return response.json();

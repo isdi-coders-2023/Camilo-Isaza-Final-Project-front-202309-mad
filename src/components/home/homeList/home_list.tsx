@@ -10,7 +10,7 @@ export function HomeList() {
     <>
       <div className="home-list">
         <p>Promociones</p>
-        <ul>
+        <ul className="home-list-ul">
           {favorites.map((item: Helmet) => (
             <HomeCard helmet={item} key={item.id}></HomeCard>
           ))}

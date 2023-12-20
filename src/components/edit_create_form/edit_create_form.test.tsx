@@ -35,7 +35,6 @@ describe('HelmetsForm Component', () => {
                 format: '',
                 url: '',
               },
-              orders: [],
               isFavorite: false,
             }}
           ></HelmetsForm>

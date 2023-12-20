@@ -8,7 +8,7 @@ type LoginState = 'idle' | 'logging' | 'error';
 export type UserState = {
   loggedUser: User | null;
   loggingState: LoginState;
-  token: string; // token
+  token: string;
 };
 
 const initial: UserState = {

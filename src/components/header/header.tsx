@@ -15,8 +15,8 @@ export function Header({ children }: Props) {
     <header>
       <div className="header" role="button" onClick={() => handleHomePage()}>
         <h1>SUPERKASKOS</h1>
-        <img src="./logo_icon.png" alt="" />
-        <img src="./logo.png" alt="" />
+        <img src="/logo_icon.png" alt="" />
+        <img src="/logo.png" alt="" />
       </div>
       {children}
       <section className="login-header">

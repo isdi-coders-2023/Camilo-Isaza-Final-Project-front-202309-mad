@@ -10,7 +10,7 @@ export default function LoginForm() {
 
   const navigate = useNavigate();
 
-  const handleSubmit = (event: SyntheticEvent) => {
+  const handleSubmit = async (event: SyntheticEvent) => {
     const form = event.target as HTMLFormElement;
     event.preventDefault();
 
@@ -22,11 +22,12 @@ export default function LoginForm() {
       email: userEmail,
       passwd: userPasswd,
     };
-    console.log(newUser);
-    login(newUser);
+
+    await login(newUser);
 
     navigate('/home');
   };
+
   return (
     <>
       <div className="login-container">

@@ -51,6 +51,13 @@ export function useHelmets() {
     [repo]
   );
 
+  const loadHelmetById = async (id: Helmet['id']) => {
+    try {
+      const result = await repo.getHelmetById(id);
+      return result;
+    } catch (error) {}
+  };
+
   const createHelmet = async (newHelmet: FormData) => {
     try {
       dispatch(
@@ -163,5 +170,6 @@ export function useHelmets() {
     updateFavoriteHelmet,
     loadFavoriteHelmets,
     favorites,
+    loadHelmetById,
   };
 }

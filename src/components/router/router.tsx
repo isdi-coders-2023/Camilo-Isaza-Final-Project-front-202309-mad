@@ -13,6 +13,7 @@ const Certificates = lazy(
   () => import('../../pages/helmetCertificate/helmetCertificate')
 );
 const AboutUs = lazy(() => import('../../pages/about-us/about-us'));
+const ShopCar = lazy(() => import('../../pages/shop_car/shop_car'));
 
 export function Router() {
   return (
@@ -33,6 +34,7 @@ export function Router() {
             element={<Certificates></Certificates>}
           ></Route>
           <Route path="/about-us" element={<AboutUs></AboutUs>}></Route>
+          <Route path="/shop-car" element={<ShopCar></ShopCar>}></Route>
           <Route path="/*" element={<ErrorMsg></ErrorMsg>}></Route>
         </Routes>
       </Suspense>

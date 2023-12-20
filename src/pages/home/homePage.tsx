@@ -5,13 +5,53 @@ import { useHelmets } from '../../hooks/useHelmets';
 import './homePage.scss';
 import { useEffect } from 'react';
 import { HomeImages } from '../../components/home/homeImages/home_images';
+import { useShopCars } from '../../hooks/useShopcars';
+import { useUsers } from '../../hooks/useUsers';
+import { ShopCar } from '../../model/shop_car';
 
 export default function HomePage() {
   const { favorites, loadFavoriteHelmets } = useHelmets();
+  const { handleCurrentShopcar, loadShopcarById } = useShopCars();
+  const { loggedUser } = useUsers();
 
   useEffect(() => {
     loadFavoriteHelmets();
   }, [loadFavoriteHelmets]);
+
+  const newShopCar: Partial<ShopCar> = {
+    userID: loggedUser?.id,
+    status: 'open',
+    items: [],
+  };
+  useEffect(() => {
+    const fetchData = async () => {
+      console.log(loggedUser);
+      if (loggedUser) {
+        if (loggedUser.role === 'User') {
+          if (loggedUser.orders.length > 0) {
+            const allOrders = await Promise.all(
+              loggedUser.orders.map(async (order) => {
+                return await loadShopcarById(order);
+              })
+            );
+
+            const currentOrder = allOrders.find(
+              (order) => order?.status === 'open'
+            );
+
+            if (currentOrder) {
+              handleCurrentShopcar(currentOrder);
+            } else {
+              handleCurrentShopcar(newShopCar);
+            }
+          } else {
+            handleCurrentShopcar(newShopCar);
+          }
+        }
+      }
+    };
+    fetchData();
+  }, [loggedUser]);
 
   return (
     <>
