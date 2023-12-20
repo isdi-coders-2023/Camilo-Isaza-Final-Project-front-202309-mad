@@ -30,7 +30,7 @@ export function List() {
   useEffect(() => {
     const classify = async () => {
       const classifications = await classifyHelmets(helmets);
-      console.log('Classifications:', classifications);
+
       setHelmetsClassifications(classifications);
       const loaded = loadCategory(classifications);
       setLoadedCategories(loaded);

@@ -14,7 +14,9 @@ export function LoginHeader() {
             <Link to={'/user-page'} style={{ textDecoration: 'none' }}>
               <p className="username">{loggedUser?.name}</p>
             </Link>
-            <img src="/shop_icon_white.png" alt="logout-button" height={20} />
+            <Link to={'/shop-car'} style={{ textDecoration: 'none' }}>
+              <img src="/shop_icon_white.png" alt="logout-button" height={20} />
+            </Link>
           </div>
         </>
       ) : (

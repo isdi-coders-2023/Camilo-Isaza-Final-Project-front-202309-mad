@@ -51,6 +51,13 @@ export function useHelmets() {
     [repo]
   );
 
+  const loadHelmetById = async (id: Helmet['id']) => {
+    try {
+      const result = await repo.getHelmetById(id);
+      return result;
+    } catch (error) {}
+  };
+
   const createHelmet = async (newHelmet: FormData) => {
     try {
       dispatch(
@@ -63,7 +70,6 @@ export function useHelmets() {
   };
 
   const updateHelmet = async (id: Helmet['id'], helmet: FormData) => {
-    console.log(id);
     try {
       dispatch(
         updateHelmetThunk({
@@ -80,9 +86,8 @@ export function useHelmets() {
     isFavorite: boolean
   ) => {
     try {
-      console.log(isFavorite);
       isFavorite = !isFavorite;
-      console.log(isFavorite);
+
       dispatch(
         updateHelmetFavoriteThunk({
           id,
@@ -163,5 +168,6 @@ export function useHelmets() {
     updateFavoriteHelmet,
     loadFavoriteHelmets,
     favorites,
+    loadHelmetById,
   };
 }

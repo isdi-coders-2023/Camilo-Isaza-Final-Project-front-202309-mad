@@ -1,8 +1,9 @@
+import { serverUrl } from '../../config';
 import { Helmet } from '../../model/helmet';
 import { helmetCategory } from '../../types/helmetCategory';
 
 export class RepoHelmets {
-  url = 'http://localhost:2800/helmets';
+  url = serverUrl + '/helmets';
 
   constructor(public token: string) {}
 
@@ -32,9 +33,6 @@ export class RepoHelmets {
     const response = await fetch(
       `${this.url}/helmetsByCategories?categories=${categories.join(',')}`
     );
-    if (!response.ok) {
-      throw new Error(response.status + ' ' + response.statusText);
-    }
 
     const data = await response.json();
     return data.helmets;
@@ -70,6 +68,13 @@ export class RepoHelmets {
     return response.json();
   }
 
+  async getHelmetById(id: Helmet['id']): Promise<Helmet> {
+    const response = await fetch(`${this.url}/${id}`);
+    if (!response.ok)
+      throw new Error(response.status + ' ' + response.statusText);
+    return response.json();
+  }
+
   async getFavoriteHelmets(): Promise<Helmet[]> {
     const response = await fetch(`${this.url}/promotions`);
     if (!response.ok)
@@ -78,7 +83,6 @@ export class RepoHelmets {
   }
 
   async createHelmet(newHelmet: FormData): Promise<Helmet> {
-    console.log(newHelmet);
     const response = await fetch(this.url, {
       method: 'POST',
       body: newHelmet,
@@ -95,7 +99,6 @@ export class RepoHelmets {
     id: Helmet['id'],
     updatedHelmet: FormData
   ): Promise<Helmet> {
-    console.log(id, updatedHelmet);
     const finalUrl = `${this.url}/${id}`;
     const response = await fetch(finalUrl, {
       method: 'PATCH',
@@ -114,7 +117,7 @@ export class RepoHelmets {
     isFavorite: boolean
   ): Promise<Helmet> {
     const finalUrl = `${this.url}/${id}/favorite`;
-    console.log(isFavorite);
+
     const response = await fetch(finalUrl, {
       method: 'PATCH',
       body: JSON.stringify({ isFavorite }),

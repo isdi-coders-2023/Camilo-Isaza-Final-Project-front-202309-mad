@@ -16,7 +16,7 @@ export function Filter() {
     if (name === 'minValue') {
       newValue = Math.max(newValue, 0);
       newValue = Math.min(newValue, range.maxValue);
-      console.log(newValue);
+
       rangeChange({ ...range, minValue: newValue });
     } else if (name === 'maxValue') {
       newValue = Math.max(newValue, 0);

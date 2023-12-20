@@ -1,9 +1,14 @@
-import { Helmet } from './helmet';
-import { User } from './user';
+export type Items = {
+  helmetId: string;
+  quantity: Number;
+  id?: string;
+};
+
+type ShopCarStatus = 'open' | 'approved' | 'rejected' | 'sent' | 'delivered';
 
 export type ShopCar = {
-  orderId: string;
-  amount: number;
-  helmet: Helmet;
-  user: User;
+  id: string;
+  userID: string;
+  status: ShopCarStatus | string;
+  items: Items[];
 };

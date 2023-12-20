@@ -2,6 +2,9 @@ import { Helmet } from '../../model/helmet';
 import { Link } from 'react-router-dom';
 import { useHelmets } from '../../hooks/useHelmets';
 import { useUsers } from '../../hooks/useUsers';
+import './card.scss';
+import { useShopCars } from '../../hooks/useShopcars';
+import { ShopCar } from '../../model/shop_car';
 
 type PropsType = {
   helmet: Helmet;
@@ -10,6 +13,24 @@ type PropsType = {
 export function Card({ helmet }: PropsType) {
   const { handleCurrentHelmet } = useHelmets();
   const { loggedUser, token } = useUsers();
+  const { currentShopCar, updateShopCar } = useShopCars();
+
+  const handleAddToCart = async (helmetId: string) => {
+    if (!loggedUser?.id) {
+      console.error('Usuario no autenticado. No se puede añadir al carrito.');
+      return;
+    }
+
+    const currentItems = currentShopCar?.items || [];
+
+    const updatedItems = [...currentItems, { quantity: 1, helmetId }];
+
+    const shopCarToUpdate: Partial<ShopCar> = {
+      ...currentShopCar,
+      items: updatedItems,
+    };
+    await updateShopCar(currentShopCar?.id, shopCarToUpdate);
+  };
 
   return (
     <>
@@ -74,12 +95,16 @@ export function Card({ helmet }: PropsType) {
                 </Link>
               </div>
             ) : token ? (
-              <div className="add-to-cart">
+              <div
+                className="add-to-cart"
+                onClick={() => handleAddToCart(helmet.id)}
+              >
                 <p>Añadir al carrito</p>
                 <img
                   src="/shop_icon_white.png"
                   alt="add to cart button"
                   width={20}
+                  role="button"
                 />
               </div>
             ) : (

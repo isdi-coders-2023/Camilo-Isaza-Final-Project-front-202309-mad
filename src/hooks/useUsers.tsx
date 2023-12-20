@@ -24,7 +24,6 @@ export function useUsers() {
   };
 
   const login = (loginUser: LoginUser) => {
-    console.log(loginUser);
     dispatch(loginThunk({ loginUser, repo, userStore }));
   };
 
