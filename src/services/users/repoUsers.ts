@@ -1,8 +1,9 @@
+import { serverUrl } from '../../config';
 import { LoginUser, User } from '../../model/user';
 import { LoginResponse } from '../../types/login.payload';
 
 export class RepoUsers {
-  url = 'http://localhost:2800/users';
+  url = serverUrl + '/users';
 
   async getUsers(): Promise<User[]> {
     const response = await fetch(this.url);

@@ -10,8 +10,6 @@ import { ShopCar } from '../../model/shop_car';
 import { Helmet } from '../../model/helmet';
 
 import { useHelmets } from '../../hooks/useHelmets';
-/* import { useUsers } from '../../hooks/useUsers';
-import { User } from '../../model/user'; */
 
 jest.mock('../../hooks/useUsers', () => ({
   useUsers: jest.fn().mockReturnValue({

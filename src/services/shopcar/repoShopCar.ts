@@ -1,7 +1,8 @@
+import { serverUrl } from '../../config';
 import { Items, ShopCar } from '../../model/shop_car';
 
 export class RepoShopCars {
-  url = 'http://localhost:2800/shopcar';
+  url = serverUrl + '/shopcar';
 
   constructor(public token: string) {}
   async getShopcars(): Promise<ShopCar[]> {

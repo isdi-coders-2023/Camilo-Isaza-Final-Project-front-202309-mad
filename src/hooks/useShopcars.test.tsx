@@ -64,21 +64,21 @@ describe('Given useUsers Hook', () => {
   });
 
   describe('When we click button loadShopCarsByUserId', () => {
-    test('Then the dispacht should have been called', async () => {
+    test('Then the dispacht should have been called.', async () => {
       await userEvent.click(elements[1]);
       expect(useDispatch()).toHaveBeenCalled();
     });
   });
 
   describe('When we click button updateShopCar', () => {
-    test('Then the dispacht should have been called', async () => {
+    test('Then the dispacht should have been called..', async () => {
       await userEvent.click(elements[2]);
       expect(useDispatch()).toHaveBeenCalled();
     });
   });
 
   describe('When we click button loadShopcarById', () => {
-    test('Then the dispacht should have been called', async () => {
+    test('Then the dispacht should have been called...', async () => {
       const mockToken = '1';
       const mockrepo = new RepoShopCars(mockToken);
       await userEvent.click(elements[3]);
@@ -87,7 +87,7 @@ describe('Given useUsers Hook', () => {
   });
 
   describe('When we click button handleCurrentShopcar ', () => {
-    test('Then the dispacht should have been called', async () => {
+    test('Then the dispacht should have been called....', async () => {
       await userEvent.click(elements[4]);
       expect(useDispatch()).toHaveBeenCalled();
     });

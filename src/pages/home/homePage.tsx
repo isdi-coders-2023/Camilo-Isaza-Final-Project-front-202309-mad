@@ -25,7 +25,6 @@ export default function HomePage() {
   };
   useEffect(() => {
     const fetchData = async () => {
-      console.log(loggedUser);
       if (loggedUser) {
         if (loggedUser.role === 'User') {
           if (loggedUser.orders.length > 0) {

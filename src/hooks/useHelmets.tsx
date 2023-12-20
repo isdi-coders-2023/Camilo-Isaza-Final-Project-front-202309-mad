@@ -70,7 +70,6 @@ export function useHelmets() {
   };
 
   const updateHelmet = async (id: Helmet['id'], helmet: FormData) => {
-    console.log(id);
     try {
       dispatch(
         updateHelmetThunk({
@@ -87,9 +86,8 @@ export function useHelmets() {
     isFavorite: boolean
   ) => {
     try {
-      console.log(isFavorite);
       isFavorite = !isFavorite;
-      console.log(isFavorite);
+
       dispatch(
         updateHelmetFavoriteThunk({
           id,

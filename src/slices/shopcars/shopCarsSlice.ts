@@ -64,7 +64,6 @@ const ShopCarSlice = createSlice({
       updateShopCarThunk.fulfilled,
       (state: ShopcarsState, { payload }: PayloadAction<ShopCar>) => {
         state.currentShopCar = payload;
-        console.log(state.currentShopCar);
 
         return state;
       }

@@ -39,8 +39,6 @@ export function useShopCars() {
     id?: ShopCar['id'],
     shopcar?: Partial<ShopCar> | Omit<ShopCar, 'id'>
   ) => {
-    console.log(shopcar);
-    console.log(currentShopCar);
     try {
       await dispatch(
         updateShopCarThunk({
