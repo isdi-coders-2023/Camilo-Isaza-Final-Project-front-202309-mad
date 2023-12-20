@@ -47,25 +47,3 @@ describe('Given HomePage component', () => {
     expect(useHelmets().loadFavoriteHelmets).toHaveBeenCalled();
   });
 });
-
-/* describe('Given HomePage component', () => {
-  test('renders HomePage with HomeImages', () => {
-    useUsers().loggedUser = {
-      name: 'Camilo',
-      role: 'User',
-      orders: null,
-    } as unknown as User;
-    const { getByText } = render(
-      <Router>
-        <Provider store={store}>
-          <HomePage />
-        </Provider>
-      </Router>
-    );
-
-    expect(getByText(/Ver Todos los cascos/i)).toBeInTheDocument();
-
-    expect(useHelmets().loadFavoriteHelmets).toHaveBeenCalled();
-  });
-});
- */

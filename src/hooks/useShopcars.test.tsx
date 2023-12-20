@@ -43,7 +43,7 @@ describe('Given useUsers Hook', () => {
     );
   };
 
-  let elements: HTMLElement[];
+  let elementsShopCar: HTMLElement[];
 
   beforeEach(() => {
     render(
@@ -53,26 +53,26 @@ describe('Given useUsers Hook', () => {
         </MemoryRouter>
       </Provider>
     );
-    elements = screen.getAllByRole('button');
+    elementsShopCar = screen.getAllByRole('button');
   });
 
   describe('When we click button loadShopCars', () => {
     test('Then the dispacht should have been called', async () => {
-      await userEvent.click(elements[0]);
+      await userEvent.click(elementsShopCar[0]);
       expect(useDispatch()).toHaveBeenCalled();
     });
   });
 
   describe('When we click button loadShopCarsByUserId', () => {
     test('Then the dispacht should have been called.', async () => {
-      await userEvent.click(elements[1]);
+      await userEvent.click(elementsShopCar[1]);
       expect(useDispatch()).toHaveBeenCalled();
     });
   });
 
   describe('When we click button updateShopCar', () => {
     test('Then the dispacht should have been called..', async () => {
-      await userEvent.click(elements[2]);
+      await userEvent.click(elementsShopCar[2]);
       expect(useDispatch()).toHaveBeenCalled();
     });
   });
@@ -81,14 +81,14 @@ describe('Given useUsers Hook', () => {
     test('Then the dispacht should have been called...', async () => {
       const mockToken = '1';
       const mockrepo = new RepoShopCars(mockToken);
-      await userEvent.click(elements[3]);
+      await userEvent.click(elementsShopCar[3]);
       expect(mockrepo.getShopcar).toHaveBeenCalled();
     });
   });
 
   describe('When we click button handleCurrentShopcar ', () => {
     test('Then the dispacht should have been called....', async () => {
-      await userEvent.click(elements[4]);
+      await userEvent.click(elementsShopCar[4]);
       expect(useDispatch()).toHaveBeenCalled();
     });
   });
